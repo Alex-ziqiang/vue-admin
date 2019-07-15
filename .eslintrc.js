@@ -3,13 +3,16 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
+  extends: [
     'plugin:vue/recommended',
     '@vue/standard'
   ],
+  globals: {
+    AMap: false
+  },
   rules: {
-    'no-console': 'off',
-    'no-debugger': 'off'
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
   parserOptions: {
     parser: 'babel-eslint'
