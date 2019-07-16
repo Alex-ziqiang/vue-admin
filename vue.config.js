@@ -77,6 +77,17 @@ module.exports = {
             }])
             .end()
           config
+            .plugin('CompressionWebpackPlugin')
+            .use('compression-webpack-plugin')
+            .tap(() => [
+              {
+                test: /\.js$|\.css$/,
+                threshold: 10240,
+                minRatio: 0.8
+              }
+            ])
+            .end()
+          config
             .optimization.splitChunks({
               chunks: 'all',
               cacheGroups: {
