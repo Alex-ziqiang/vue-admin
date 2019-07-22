@@ -11,7 +11,6 @@ module.exports = {
   productionSourceMap: false,
 
   devServer: {
-    hotOnly: true,
     open: true,
     proxy: {
       '/api': {
@@ -28,9 +27,13 @@ module.exports = {
     }
   },
 
-  chainWebpack (config) {
-    config.plugins.delete('preload')
-    config.plugins.delete('prefetch')
+  chainWebpack: config => {
+    config.plugins
+      .delete('preload')
+      .delete('prefetch')
+
+    config.resolve
+      .symlinks(true)
 
     // set svg-sprite-loader
     config.module
