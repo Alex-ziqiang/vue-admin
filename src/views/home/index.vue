@@ -1,5 +1,20 @@
 <template>
   <div>
+    <Form
+      :ref-obj.sync="ref"
+      :form="form"
+      :form-items="formItems"
+      :inline="true"
+      :rules="rules"
+      @selectChange="selectChange"
+    />
+    <el-button
+      type="primary"
+      @click="searchSubmit"
+    >
+      <svg-icon icon-class="loading" />
+      查询
+    </el-button>
     <Table
       :data="data"
       :columns="columns"
@@ -9,7 +24,7 @@
     >
       <el-table-column
         slot="option"
-        label="操作"
+        label="选项"
       >
         <el-button
           slot-scope="{ row }"
@@ -18,15 +33,15 @@
         </el-button>
       </el-table-column>
     </Table>
-    <span>4</span>
   </div>
 </template>
 
 <script>
 import Table from '@/components/Table'
+import Form from '@/components/Form'
 export default {
   name: 'Home',
-  components: { Table },
+  components: { Table, Form },
   data () {
     return {
       columns: [
@@ -64,6 +79,26 @@ export default {
         currentPage: 1,
         pageSize: 10,
         total: 2
+      },
+      ref: null,
+      form: {},
+      formItems: [
+        { type: 'input', label: '账号', value: 'account', clearable: true },
+        { type: 'password', label: '密码', value: 'password', clearable: true },
+        { type: 'textarea', label: '备注', value: 'description', clearable: true, rows: '4', resize: 'none' },
+        { type: 'inputNumber', label: '数字', value: 'number', disabled: true },
+        { type: 'select', label: '角色', value: 'role', clearable: true, list: [{ label: '全部', value: '' }, { label: '超级管理员', value: 'SUPER' }, { label: '管理员', value: 'ADMIN' }] },
+        { type: 'date', label: '日期', value: 'date', clearable: true },
+        { type: 'datetime', label: '日期时间', value: 'datetime', clearable: true },
+        { type: 'datetimerange', label: '日期时间范围', value: 'datetimerange', clearable: true }
+      ],
+      rules: {
+        account: [
+          { required: true, message: '请输入账号', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -78,6 +113,18 @@ export default {
       console.log(val)
     },
     handleSizeChange (val) {
+      console.log(val)
+    },
+    searchSubmit () {
+      console.log(this.ref)
+      this.ref.validate(valid => {
+        if (!valid) {
+          return
+        }
+        console.log(this.form)
+      })
+    },
+    selectChange (val) {
       console.log(val)
     }
   }
