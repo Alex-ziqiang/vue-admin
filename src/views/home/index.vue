@@ -3,9 +3,12 @@
     <Table
       :data="data"
       :columns="columns"
+      :pagination="pagination"
+      @current-change="onPagination"
+      @size-change="handleSizeChange"
     >
       <el-table-column
-        slot="options"
+        slot="option"
         label="操作"
       >
         <el-button
@@ -32,10 +35,10 @@ export default {
         { prop: 'address', label: '地址' },
         { prop: 'change', label: '变化' },
         { prop: 'trend', label: '趋势' },
-        { slot: 'options' },
+        { slot: 'option' },
         {
           label: '操作',
-          operations: [{
+          buttons: [{
             label: '禁用',
             click: this.disableTag
           }, {
@@ -56,7 +59,12 @@ export default {
         address: '上海市普陀区金沙江路 1517 弄',
         change: '-12%',
         trend: '-10%'
-      }]
+      }],
+      pagination: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 2
+      }
     }
   },
   methods: {
@@ -65,6 +73,12 @@ export default {
     },
     ableTag (row) {
       console.log(row)
+    },
+    onPagination (val) {
+      console.log(val)
+    },
+    handleSizeChange (val) {
+      console.log(val)
     }
   }
 }

@@ -1,39 +1,55 @@
 <template>
-  <el-table
+  <div
     v-loading="loading"
-    v-bind="$attrs"
-    :data="data"
-    v-on="$listeners"
+    class="table"
   >
-    <template v-for="(column, index) in columns">
-      <slot
-        v-if="column.slot"
-        :name="column.slot"
-      />
-      <el-table-column
-        v-if="column.operations"
-        :key="index"
-        v-bind="column"
+    <div class="table-body">
+      <el-table
+        v-bind="$attrs"
+        :data="data"
+        v-on="$listeners"
       >
-        <template v-slot="{ row }">
-          <el-button
-            v-for="(operation, number) in column.operations"
-            :key="number"
-            v-bind="operation"
-            @click="operation.click(row)"
+        <template v-for="(column, index) in columns">
+          <slot
+            v-if="column.slot && !column.hidden"
+            :name="column.slot"
+          />
+          <el-table-column
+            v-if="column.buttons && !column.hidden"
+            :key="index"
+            v-bind="column"
           >
-            {{ operation.label }}
-          </el-button>
+            <template v-slot="{row}">
+              <el-button
+                v-for="(button, number) in column.buttons.filter(button => !button.hidden)"
+                :key="number"
+                v-bind="button"
+                @click="button.click(row)"
+              >
+                {{ button.label }}
+              </el-button>
+            </template>
+          </el-table-column>
+          <el-table-column
+            v-else-if="!column.hidden"
+            :key="index"
+            v-bind="column"
+            :hidden-overflow-tooltip="true"
+          />
         </template>
-      </el-table-column>
-      <el-table-column
-        v-else
-        :key="index"
-        v-bind="column"
-        :show-overflow-tooltip="true"
+      </el-table>
+    </div>
+    <div
+      v-if="pagination"
+      class="table-pagination"
+    >
+      <el-pagination
+        :layout="layout"
+        v-bind="pagination"
+        v-on="$listeners"
       />
-    </template>
-  </el-table>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -51,6 +67,14 @@ export default {
     columns: {
       type: Array,
       required: true
+    },
+    pagination: {
+      type: Object,
+      default: null
+    },
+    layout: {
+      type: String,
+      default: 'total, sizes, prev, pager, next, jumper'
     }
   }
 }
