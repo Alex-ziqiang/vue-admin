@@ -7,7 +7,6 @@
       <el-table
         v-bind="$attrs"
         :data="data"
-        v-on="$listeners"
       >
         <template v-for="(column, index) in columns">
           <slot
@@ -46,7 +45,8 @@
       <el-pagination
         :layout="layout"
         v-bind="pagination"
-        v-on="$listeners"
+        @current-change="handleChangeCurrentChange"
+        @size-change="handleSizeChange"
       />
     </div>
   </div>
@@ -75,6 +75,14 @@ export default {
     layout: {
       type: String,
       default: 'total, sizes, prev, pager, next, jumper'
+    }
+  },
+  methods: {
+    handleChangeCurrentChange (val) {
+      this.$emit('current-change', val)
+    },
+    handleSizeChange (val) {
+      this.$emit('size-change', val)
     }
   }
 }
