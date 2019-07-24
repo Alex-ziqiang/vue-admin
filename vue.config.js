@@ -35,6 +35,19 @@ module.exports = {
     config.resolve
       .symlinks(true)
 
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .end()
+
+    config.module
+      .rule('images')
+      .use('image-webpack-loader')
+      .loader('image-webpack-loader')
+      .options({
+        bypassOnDebug: true
+      })
+      .end()
+
     // set svg-sprite-loader
     config.module
       .rule('svg')
