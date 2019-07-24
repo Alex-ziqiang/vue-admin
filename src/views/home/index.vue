@@ -7,14 +7,17 @@
       :inline="true"
       :rules="rules"
       @selectChange="selectChange"
-    />
-    <el-button
-      type="primary"
-      @click="searchSubmit"
     >
-      <svg-icon icon-class="loading" />
-      查询
-    </el-button>
+      <template slot="buttons">
+        <el-button
+          type="primary"
+          @click="searchSubmit"
+        >
+          <svg-icon icon-class="loading" />
+          查询
+        </el-button>
+      </template>
+    </Form>
     <Table
       :data="data"
       :columns="columns"
@@ -90,7 +93,8 @@ export default {
         { type: 'select', label: '角色', value: 'role', clearable: true, list: [{ label: '全部', value: '' }, { label: '超级管理员', value: 'SUPER' }, { label: '管理员', value: 'ADMIN' }] },
         { type: 'date', label: '日期', value: 'date', clearable: true },
         { type: 'datetime', label: '日期时间', value: 'datetime', clearable: true },
-        { type: 'datetimerange', label: '日期时间范围', value: 'datetimerange', clearable: true }
+        { type: 'datetimerange', label: '日期时间范围', value: 'datetimerange', clearable: true },
+        { type: 'slot', value: 'buttons' }
       ],
       rules: {
         account: [

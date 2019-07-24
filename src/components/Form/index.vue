@@ -17,7 +17,7 @@
     >
       <!-- solt -->
       <template v-if="item.type === 'slot'">
-        <slot :name="'form-' + item.value" />
+        <slot :name="item.value" />
       </template>
       <!-- 普通输入框 -->
       <el-input
