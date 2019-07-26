@@ -1,3 +1,4 @@
 FROM nginx
-COPY /nginx.conf /etc/nginx/nginx.conf
-COPY /dist /usr/share/nginx/html
+WORKDIR /
+COPY ./nginx.conf /etc/nginx/nginx.conf
+ADD ./dist /usr/share/nginx/html
