@@ -8,6 +8,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './icons' // icon
+import './permission' // permission control
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false

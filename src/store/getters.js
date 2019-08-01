@@ -1,7 +1,7 @@
 const getters = {
   loading: state => state.global.loading,
-  operatorBean: state => state.manager.operatorBean,
   isCollapse: state => state.global.isCollapse,
-  routes: state => state.global.routes
+  operatorBean: state => state.manager.operatorBean,
+  routes: state => state.manager.routes
 }
 export default getters

@@ -43,11 +43,6 @@ export default {
       type: Array,
       required: true
     }
-  },
-  computed: {
-    isCollapse () {
-      return this.$store.getters.isCollapse
-    }
   }
 }
 </script>

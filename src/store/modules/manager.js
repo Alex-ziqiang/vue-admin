@@ -1,6 +1,6 @@
 import { managerLogin, managerLogout, getManagers } from '@/api/manager'
 import { setItem, removeItem, getItem } from '@/utils/auth'
-import router from '@/router'
+import { resetRouter } from '@/router'
 
 export default {
   namespaced: true,
@@ -35,9 +35,8 @@ export default {
         managerLogout().then(() => {
           removeItem('LG_TK')
           removeItem('US_ID')
-          // 先转跳再清空角色和账号
-          router.push('/login')
           commit('SET_OPERATORBEAN', {})
+          resetRouter()
           resolve()
         }).catch(error => {
           reject(error)
@@ -56,7 +55,7 @@ export default {
     // 获取用户信息
     getUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
-        const operatorUUID = state.operatorUUID
+        const operatorUUID = getItem('US_ID')
         getManagers(operatorUUID).then((response = {}) => {
           /** 存储用户信息 */
           commit('SET_OPERATORBEAN', response.operatorBean)
