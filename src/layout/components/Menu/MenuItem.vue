@@ -13,7 +13,7 @@
       >{{ item.meta.title }}</span>
     </template>
     <!-- 当有子集时再次调用该组件(递归) -->
-    <MenuItem
+    <menu-item
       v-for="child in item.children.filter(child => !child.hidden)"
       :key="child.path"
       :item="child"
@@ -39,10 +39,6 @@ export default {
     item: {
       type: Object,
       required: true
-    }
-  },
-  data () {
-    return {
     }
   }
 }

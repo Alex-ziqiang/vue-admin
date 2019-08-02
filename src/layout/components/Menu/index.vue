@@ -20,7 +20,7 @@
         <div class="btn-item center" />
         <div class="btn-item" />
       </div>
-      <MenuItem
+      <menu-item
         v-for="item in menuList.filter(item => !item.hidden)"
         :key="item.path"
         :item="item"
