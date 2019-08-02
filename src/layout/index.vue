@@ -1,10 +1,9 @@
 <template>
   <div>
-    <Menu :menu-list="routes" />
+    <Menu />
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 import Menu from './components/Menu'
 export default {
   name: 'Layout',
@@ -12,11 +11,6 @@ export default {
   data () {
     return {
     }
-  },
-  computed: {
-    ...mapGetters([
-      'routes'
-    ])
   }
 }
 </script>

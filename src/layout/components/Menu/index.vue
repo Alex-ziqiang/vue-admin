@@ -21,7 +21,7 @@
         <div class="btn-item" />
       </div>
       <menu-item
-        v-for="item in menuList.filter(item => !item.hidden)"
+        v-for="item in routes.filter(item => !item.hidden)"
         :key="item.path"
         :item="item"
       />
@@ -34,15 +34,10 @@ import MenuItem from './MenuItem'
 export default {
   name: 'Menu',
   components: { MenuItem },
-  props: {
-    menuList: {
-      type: Array,
-      required: true
-    }
-  },
   computed: {
     ...mapGetters([
-      'isCollapse'
+      'isCollapse',
+      'routes'
     ])
   },
   methods: {
