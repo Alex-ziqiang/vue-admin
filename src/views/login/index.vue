@@ -41,6 +41,7 @@
           <img
             class="code"
             :src="authCodeSrc"
+            @click="createCode"
           >
         </el-form-item>
         <div class="login-btn">

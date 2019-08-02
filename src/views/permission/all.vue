@@ -14,7 +14,7 @@
         </el-tag> 能看到
       </div>
       <div
-        v-permission="['ADMIN']"
+        v-permission="['SUPER_MGR']"
         class="permission-alert"
       >
         <el-tag
@@ -25,7 +25,7 @@
         </el-tag> 能看到
       </div>
       <div
-        v-permission="['SUPER','ADMIN']"
+        v-permission="['SUPER','SUPER_MGR']"
         class="permission-alert"
       >
         <el-tag
@@ -48,19 +48,19 @@
     >
       <el-tab-pane
         v-if="checkPermission(['SUPER'])"
-        label="Admin"
+        label="SUPER_MGR"
       >
         超级管理员能看到
       </el-tab-pane>
       <el-tab-pane
-        v-if="checkPermission(['ADMIN'])"
+        v-if="checkPermission(['SUPER_MGR'])"
         label="Editor"
       >
         管理员能看到
       </el-tab-pane>
       <el-tab-pane
-        v-if="checkPermission(['SUPER','ADMIN'])"
-        label="Admin-OR-Editor"
+        v-if="checkPermission(['SUPER','SUPER_MGR'])"
+        label="SUPER_MGR-OR-Editor"
       >
         所有权限能看到
       </el-tab-pane>

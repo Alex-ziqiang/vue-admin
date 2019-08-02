@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'SuperAdmin'
+  name: 'Super'
 }
 </script>
 <style lang="scss" scoped>

@@ -19,7 +19,7 @@
         <div class="btn-item center" />
         <div class="btn-item" />
       </div>
-      <Menu :menu-list="menuList" />
+      <Menu :menu-list="routes" />
     </el-menu>
   </div>
 </template>
@@ -348,7 +348,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isCollapse'
+      'isCollapse',
+      'routes'
     ])
   },
   methods: {

@@ -200,7 +200,7 @@ export default {
         { type: 'password', label: '密码', value: 'password', clearable: true },
         { type: 'textarea', label: '备注', value: 'description', clearable: true, rows: '4', resize: 'none' },
         { type: 'inputNumber', label: '数字', value: 'number', disabled: true },
-        { type: 'select', label: '角色', value: 'role', clearable: true, list: [{ label: '全部', value: '' }, { label: '超级管理员', value: 'SUPER' }, { label: '管理员', value: 'ADMIN' }] },
+        { type: 'select', label: '角色', value: 'role', clearable: true, list: [{ label: '全部', value: '' }, { label: '超级管理员', value: 'SUPER' }, { label: '管理员', value: 'SUPER_MGR' }] },
         { type: 'date', label: '日期', value: 'date', clearable: true },
         { type: 'datetime', label: '日期时间', value: 'datetime', clearable: true },
         { type: 'datetimerange', label: '日期时间范围', value: 'datetimerange', clearable: true },

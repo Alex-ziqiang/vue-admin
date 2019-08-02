@@ -2,7 +2,7 @@
   <div class="menu-wrapper">
     <!-- 菜单部分 -->
     <template
-      v-for="item in menuList .filter(item => !item.hidden)"
+      v-for="item in menuList.filter(item => !item.hidden)"
     >
       <!-- 有子路由，且父路由的path不为空-->
       <el-submenu
