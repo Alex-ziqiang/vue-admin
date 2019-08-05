@@ -1,5 +1,6 @@
 <template>
   <section class="app-main">
+    <Breadcrumb v-show="$route.path !== '/index'" />
     <transition
       name="fade"
       mode="out-in"
@@ -8,9 +9,12 @@
     </transition>
   </section>
 </template>
+
 <script>
+import Breadcrumb from '@/components/Breadcrumb'
 export default {
-  name: 'AppMain'
+  name: 'AppMain',
+  components: { Breadcrumb }
 }
 </script>
 <style lang="scss" scoped>

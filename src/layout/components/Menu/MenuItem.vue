@@ -32,6 +32,7 @@
     >{{ item.meta.title }}</span>
   </el-menu-item>
 </template>
+
 <script>
 export default {
   name: 'MenuItem',

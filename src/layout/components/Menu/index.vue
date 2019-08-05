@@ -28,6 +28,7 @@
     </el-menu>
   </div>
 </template>
+
 <script>
 import { mapGetters } from 'vuex'
 import MenuItem from './MenuItem'

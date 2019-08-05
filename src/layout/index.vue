@@ -1,15 +1,18 @@
 <template>
   <div>
+    <Header />
     <Menu />
     <AppMain />
   </div>
 </template>
+
 <script>
-import AppMain from './components/AppMain'
+import Header from './components/Header'
 import Menu from './components/Menu'
+import AppMain from './components/AppMain'
 export default {
   name: 'Layout',
-  components: { AppMain, Menu },
+  components: { Header, Menu, AppMain },
   data () {
     return {
     }
