@@ -46,7 +46,7 @@
         v-model="form[item.value]"
         v-bind="item"
         :placeholder="getPlaceholder(item)"
-        @change="handleChange(form[item.value])"
+        @change="item.change(form[item.value])"
       >
         <el-option
           v-for="(childItem, childIndex) in item.list"
@@ -81,6 +81,17 @@
         start-placeholder="开始日期"
         end-placeholder="结束日期"
       />
+      <!-- 按钮 -->
+      <template v-if="item.type === 'buttons'">
+        <el-button
+          v-for="(button, number) in item.buttons"
+          :key="number"
+          v-bind="button"
+          @click="button.click"
+        >
+          {{ button.label }}
+        </el-button>
+      </template>
     </el-form-item>
   </el-form>
 </template>
@@ -140,9 +151,6 @@ export default {
         placeholder = row.label
       }
       return placeholder
-    },
-    handleChange (data) {
-      this.$emit('selectChange', data)
     }
   }
 }

@@ -1,72 +1,57 @@
 <template>
   <div class="login-wrap">
-    <div class="login-content">
-      <el-form
-        ref="loginForm"
-        :model="loginForm"
-        :rules="loginRules"
-        class="login-form"
-        label-position="top"
-        @keyup.enter.native="submitForm('loginForm')"
-      >
-        <el-form-item
-          label="账号"
-          prop="account"
+    <Form
+      class="login-form"
+      label-position="top"
+      :ref-obj.sync="ref"
+      :form="loginForm"
+      :form-items="loginFormItems"
+      :rules="loginRules"
+      @keyup.enter.native="submitForm"
+    >
+      <template slot="authCode">
+        <el-input
+          v-model="loginForm.authCode"
+          class="authCode"
+          :maxlength="4"
+          placeholder="验证码"
+        />
+        <img
+          class="code"
+          :src="authCodeSrc"
+          @click="createCode"
         >
-          <el-input
-            v-model="loginForm.account"
-            placeholder="账号"
-          />
-        </el-form-item>
-        <el-form-item
-          label="密码"
-          prop="password"
+      </template>
+      <template slot="submit">
+        <el-button
+          :loading="loading"
+          type="primary"
+          @click="submitForm"
         >
-          <el-input
-            v-model="loginForm.password"
-            type="password"
-            placeholder="密码"
-          />
-        </el-form-item>
-        <el-form-item
-          label="验证码"
-          prop="authCode"
-        >
-          <el-input
-            v-model="loginForm.authCode"
-            :maxlength="4"
-            placeholder="验证码"
-            class="authCode"
-          />
-          <img
-            class="code"
-            :src="authCodeSrc"
-            @click="createCode"
-          >
-        </el-form-item>
-        <div class="login-btn">
-          <el-button
-            :loading="loading"
-            type="primary"
-            @click="submitForm('loginForm')"
-          >
-            登录
-          </el-button>
-        </div>
-      </el-form>
-    </div>
+          登录
+        </el-button>
+      </template>
+    </Form>
   </div>
 </template>
 
 <script>
+import Form from '@/components/Form'
 export default {
   name: 'Login',
-  components: {},
+  components: { Form },
   props: {},
   data () {
     return {
       authCodeSrc: '',
+      ref: null,
       loginForm: {},
+      loginFormItems: [
+        { type: 'input', label: '账号', value: 'account', clearable: true },
+        { type: 'password', label: '密码', value: 'password', clearable: true },
+        { type: 'slot', label: '验证码', value: 'authCode' },
+        { type: 'slot', value: 'submit' }
+      ],
       loginRules: {
         account: [
           { required: true, message: '请输入账号', trigger: 'blur' }
@@ -92,8 +77,8 @@ export default {
       const authCodeApi = '/api/v0/authcode' // 获取图片验证码
       this.authCodeSrc = `${authCodeApi}?uuid=${this.time}`
     },
-    submitForm (formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm () {
+      this.ref.validate(valid => {
         if (valid) {
           this.loading = true
           const data = { ...this.loginForm, 'authCodeUUID': this.time }
@@ -115,21 +100,19 @@ export default {
 
 <style lang="scss" scoped>
 .login-wrap {
-  .login-content {
-    .login-form {
-      position: relative;
-      width: 520px;
-      max-width: 100%;
-      padding: 35px;
-      margin: 0 auto;
-      overflow: hidden;
-      border: 1px solid #ccc;
-      .authCode {
-        width: 60%;
-      }
-      .code {
-        float: right;
-      }
+  .login-form {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    padding: 35px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    .authCode {
+      width: 60%;
+    }
+    .code {
+      float: right;
     }
   }
 }

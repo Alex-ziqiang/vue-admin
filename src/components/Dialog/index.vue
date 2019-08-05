@@ -1,6 +1,5 @@
 <template>
   <el-dialog
-    class="dialog"
     v-bind="$attrs"
     :visible="outerVisible"
     @open="outOpen"
