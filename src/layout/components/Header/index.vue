@@ -8,20 +8,20 @@
         class="right-item"
         @command="handleCommand"
       >
-        <div class="dropdown-link">
+        <div class="avatar-wrapper">
           <img
             src="@/assets/images/avatar.png"
             class="role-img"
           >
-          <!-- <div>
-            <div class="role">
-              {{ roleFormat(operatorBean.roleType) }}
-            </div>
-            <div class="username">
-              {{ operatorBean.userName }}
-            </div>
-          </div> -->
         </div>
+        <!-- <div>
+          <div class="role">
+            {{ roleFormat(operatorBean.roleType) }}
+          </div>
+          <div class="username">
+            {{ operatorBean.userName }}
+          </div>
+        </div> -->
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="userInfo">
             账号信息
@@ -41,7 +41,27 @@
 <script>
 
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    handleCommand (command) {
+      if (command === 'logout') {
+        this.logout()
+      } else {
+        this.dialogType = command
+        this.visible = true
+      }
+    },
+    logout () {
+      this.$confirm('确认要退出登录吗?', {
+        type: 'warning',
+        showClose: false
+      }).then(() => {
+        this.$store.dispatch('manager/handleLogOut').then(() => {
+          this.$router.push('/login')
+        })
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -60,12 +80,18 @@ export default {
       margin-left: 66px;
       letter-spacing: 1px;
       line-height: 1;
+      vertical-align: middle;
     }
   }
   .right {
     float: right;
-    height: 100%;
-    line-height: 62px;
+    .avatar-wrapper {
+      height: 100%;
+      line-height: 62px;
+      .role-img {
+        vertical-align: middle;
+      }
+    }
   }
 }
 </style>
