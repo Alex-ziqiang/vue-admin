@@ -19,13 +19,13 @@ export default {
 }
 </script>
 <style lang="scss">
-  .breadcrumb-wrapper {
-    font-size: 12px;
-    padding: 13px 32px;
-    background-color: #D1D7DF;
-    .el-breadcrumb__separator,
-    .el-breadcrumb__inner {
-      color: #4A4A4A;
-    }
+.breadcrumb-wrapper {
+  font-size: 12px;
+  padding: 13px 32px;
+  background-color: #D1D7DF;
+  .el-breadcrumb__separator,
+  .el-breadcrumb__inner {
+    color: #4A4A4A;
   }
+}
 </style>

@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="app-wrapper">
     <Header />
-    <Menu />
-    <AppMain />
+    <div class="main">
+      <Menu />
+      <AppMain class="app-main" />
+    </div>
   </div>
 </template>
 
@@ -19,3 +21,19 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.app-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  .main {
+    height: 100%;
+    flex: auto; // div.main 占满div.row除了header的额外空间
+    display: flex;
+    .app-main {
+      flex: auto;
+      flex-direction: column;
+    }
+  }
+}
+</style>

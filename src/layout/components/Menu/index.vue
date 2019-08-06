@@ -8,7 +8,6 @@
       :unique-opened="true"
       :router="true"
       text-color="#F0F0F0"
-      active-text-color="#FFFFFF"
       background-color="#1B273C"
     >
       <!-- 展开折叠按钮 -->
@@ -49,27 +48,30 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "~@/styles/variables.scss";
+.menu-wrapper {
+  background-color: $menuBg;
   // 如果没有此样式的话  折叠有子级菜单的父菜单文字是不会隐藏的
   .el-menu--collapse .el-menu-item span,
     .el-menu--collapse .el-submenu .el-submenu__title span,
-     .el-menu--collapse .el-submenu__icon-arrow{
+      .el-menu--collapse .el-submenu__icon-arrow{
     height: 0;
     width: 0;
     overflow: hidden;
     visibility: hidden;
     display: inline-block;
     }
- .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: $menuWidth;
     .el-menu-item:not(.is-active):hover,.el-submenu__title:hover{
-      color: #1D8DFF !important;
-      background-color: #1B273C !important;
+      color: $menuActiveText !important;
+      background-color: $menuBg;
       .iconfont{
-        color: #1D8DFF !important;
+        color: $menuActiveText;
       }
     }
   }
+}
 </style>
 <style lang="scss" scoped>
 .collapse-btn {
