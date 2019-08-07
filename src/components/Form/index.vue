@@ -19,6 +19,10 @@
       <template v-if="item.type === 'slot'">
         <slot :name="item.value" />
       </template>
+      <!-- 详情项 -->
+      <span v-if="item.type === 'detail'">
+        {{ form[item.value] }}
+      </span>
       <!-- 普通输入框 -->
       <el-input
         v-if="item.type === 'input' || item.type === 'password'"

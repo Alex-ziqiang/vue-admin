@@ -109,7 +109,7 @@ service.interceptors.response.use(
           const msg = tipText['400'][data.errorCode]
           msg ? showMessage(msg) : showMessage(data.errorMsg)
           // 如果登录超时，前端退出后转跳登录页重新登录
-          data.errorCode === '90002' && store.dispatch('fedLogOut').then(() => router.push('/login'))
+          data.errorCode === '90002' && store.dispatch('manager/fedLogOut').then(() => router.push('/login'))
         } else {
           // 404、500、502
           showMessage(tipText[status])

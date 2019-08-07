@@ -35,20 +35,34 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <UserInfo :outer-visible.sync="userInfoOuterVisible" />
+    <ModifyPassword
+      v-if="modifyPasswordOuterVisible"
+      :outer-visible.sync="modifyPasswordOuterVisible"
+    />
   </div>
 </template>
 
 <script>
-
+import UserInfo from './UserInfo'
+import ModifyPassword from './ModifyPassword'
 export default {
   name: 'Header',
+  components: { UserInfo, ModifyPassword },
+  data () {
+    return {
+      userInfoOuterVisible: false,
+      modifyPasswordOuterVisible: false
+    }
+  },
   methods: {
     handleCommand (command) {
       if (command === 'logout') {
         this.logout()
+      } else if (command === 'userInfo') {
+        this.userInfoOuterVisible = true
       } else {
-        this.dialogType = command
-        this.visible = true
+        this.modifyPasswordOuterVisible = true
       }
     },
     logout () {

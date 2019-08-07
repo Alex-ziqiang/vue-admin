@@ -14,11 +14,7 @@ import Menu from './components/Menu'
 import AppMain from './components/AppMain'
 export default {
   name: 'Layout',
-  components: { Header, Menu, AppMain },
-  data () {
-    return {
-    }
-  }
+  components: { Header, Menu, AppMain }
 }
 </script>
 <style lang="scss" scoped>

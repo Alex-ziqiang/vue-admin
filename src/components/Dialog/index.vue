@@ -2,6 +2,7 @@
   <el-dialog
     v-bind="$attrs"
     :visible="outerVisible"
+    :close-on-click-modal="type === 'normal'"
     @open="outOpen"
     @close="outerClose"
   >
@@ -52,7 +53,10 @@
       <el-button @click="cancel">
         取消
       </el-button>
-      <el-button @click="submit">
+      <el-button
+        type="primary"
+        @click="submit"
+      >
         确定
       </el-button>
     </template>
