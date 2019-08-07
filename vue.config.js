@@ -39,14 +39,14 @@ module.exports = {
       .set('@', resolve('src'))
       .end()
 
-    // config.module
-    //   .rule('images')
-    //   .use('image-webpack-loader')
-    //   .loader('image-webpack-loader')
-    //   .options({
-    //     bypassOnDebug: true
-    //   })
-    //   .end()
+    config.module
+      .rule('images')
+      .use('image-webpack-loader')
+      .loader('image-webpack-loader')
+      .options({
+        bypassOnDebug: true
+      })
+      .end()
 
     // set svg-sprite-loader
     config.module
