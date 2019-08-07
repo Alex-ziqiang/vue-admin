@@ -156,7 +156,8 @@ export default {
           width: 380,
           buttons: [{
             label: '禁用',
-            click: this.disableTag
+            click: this.disableTag,
+            ifRender: this.ifRender
           }, {
             label: '启用',
             click: this.ableTag
@@ -235,6 +236,9 @@ export default {
   methods: {
     disableTag (row) {
       console.log(row)
+    },
+    ifRender (row) {
+      return row.name === '王大虎'
     },
     ableTag (row) {
       console.log(row)

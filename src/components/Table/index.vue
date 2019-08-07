@@ -20,7 +20,7 @@
           >
             <template v-slot="{row}">
               <el-button
-                v-for="(button, number) in column.buttons.filter(button => !button.hidden)"
+                v-for="(button, number) in column.buttons.filter(button => (!button.ifRender || button.ifRender(row)))"
                 :key="number"
                 v-bind="button"
                 @click="button.click(row)"
