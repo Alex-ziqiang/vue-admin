@@ -14,14 +14,14 @@
     <!-- 当有子集时再次调用该组件(递归) -->
     <menu-item
       v-for="child in item.children.filter(child => !child.hidden)"
-      :key="child.path"
+      :key="child.name"
       :item="child"
     />
   </el-submenu>
   <!-- 无子路由 -->
   <el-menu-item
     v-else
-    :key="item.path || item.children[0].path"
+    :key="item.name || item.children[0].name"
     :index="item.path || item.children[0].path"
   >
     <i :class="item.meta.icon" />
