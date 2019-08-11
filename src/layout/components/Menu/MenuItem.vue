@@ -2,8 +2,7 @@
   <!-- 有子路由，且父路由的path不为空-->
   <el-submenu
     v-if="item.children && item.path"
-    :key="`${item.path}`"
-    :index="`${item.path}`"
+    :index="item.path"
   >
     <template slot="title">
       <i :class="item.meta.icon" />
@@ -22,7 +21,7 @@
   <!-- 无子路由 -->
   <el-menu-item
     v-else
-    :key="item.path||item.children[0].path"
+    :key="item.path || item.children[0].path"
     :index="item.path || item.children[0].path"
   >
     <i :class="item.meta.icon" />

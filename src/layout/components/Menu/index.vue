@@ -20,8 +20,8 @@
         <div class="btn-item" />
       </div>
       <menu-item
-        v-for="item in routes.filter(item => !item.hidden)"
-        :key="item.path"
+        v-for="(item, index) in routes.filter(item => !item.hidden)"
+        :key="'route' + index"
         :item="item"
       />
     </el-menu>

@@ -13,6 +13,7 @@ export const constantRoutes = [
   },
   {
     path: '/404',
+    name: '404',
     component: () => import('@/views/errorPage/404.vue'),
     hidden: true
   },
@@ -47,7 +48,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   {
     path: '/permission',
-    redirect: '/permission/superSUPER_MGR',
+    redirect: '/permission/super',
     component: Layout,
     meta: {
       title: '权限测试',
@@ -55,7 +56,7 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: '/super',
+        path: '/permission/super',
         name: 'super',
         component: () => import('@/views/permission/super'),
         meta: {
@@ -64,7 +65,7 @@ export const asyncRoutes = [
         }
       },
       {
-        path: '/admin',
+        path: '/permission/admin',
         name: 'admin',
         component: () => import('@/views/permission/admin'),
         meta: {
@@ -73,7 +74,7 @@ export const asyncRoutes = [
         }
       },
       {
-        path: '/all',
+        path: '/permission/all',
         name: 'all',
         component: () => import('@/views/permission/all'),
         meta: {
