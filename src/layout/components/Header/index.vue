@@ -37,8 +37,8 @@
     </div>
     <UserInfo :outer-visible.sync="userInfoOuterVisible" />
     <ModifyPassword
-      v-if="modifyPasswordOuterVisible"
       :outer-visible.sync="modifyPasswordOuterVisible"
+      :form="form"
     />
   </div>
 </template>
@@ -52,7 +52,8 @@ export default {
   data () {
     return {
       userInfoOuterVisible: false,
-      modifyPasswordOuterVisible: false
+      modifyPasswordOuterVisible: false,
+      form: {}
     }
   },
   methods: {
@@ -63,6 +64,7 @@ export default {
         this.userInfoOuterVisible = true
       } else {
         this.modifyPasswordOuterVisible = true
+        this.form = {}
       }
     },
     logout () {

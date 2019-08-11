@@ -40,7 +40,6 @@ import Form from '@/components/Form'
 export default {
   name: 'Login',
   components: { Form },
-  props: {},
   data () {
     return {
       authCodeSrc: '',

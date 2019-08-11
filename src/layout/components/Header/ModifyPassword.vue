@@ -34,6 +34,10 @@ export default {
     outerVisible: {
       type: Boolean,
       required: true
+    },
+    form: {
+      type: Object,
+      required: true
     }
   },
   data () {
@@ -55,7 +59,6 @@ export default {
     }
     return {
       ref: null,
-      form: {},
       formItems: [
         { type: 'slot', label: '账号', value: 'userName' },
         { type: 'password', label: '原密码', value: 'originPassword', clearable: true },
