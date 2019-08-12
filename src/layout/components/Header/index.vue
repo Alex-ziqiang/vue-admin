@@ -85,7 +85,7 @@ export default {
   height: 62px;
   overflow: hidden;
   position: relative;
-  background: #1D2B36;
+  background: #1d2b36;
   .left {
     display: inline-block;
     height: 100%;

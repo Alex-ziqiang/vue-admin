@@ -13,16 +13,16 @@ module.exports = {
   devServer: {
     open: true,
     proxy: {
-      '/api': {
-        target: 'https://dev-tsp.bigdatahd.cn:30001',
-        changeOrigin: true
-      },
       '/api/yapi': {
         target: 'http://172.16.4.33:3000/mock/11',
         changeOrigin: true,
         pathRewrite: {
           '^/api/yapi': ''
         }
+      },
+      '/api': {
+        target: 'https://dev-tsp.bigdatahd.cn:30001',
+        changeOrigin: true
       }
     }
   },
@@ -88,7 +88,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()

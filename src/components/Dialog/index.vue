@@ -123,6 +123,7 @@ export default {
     },
     cancel () {
       this.outerClose()
+      this.$emit('cancel')
     },
     submit () {
       this.$emit('submit')

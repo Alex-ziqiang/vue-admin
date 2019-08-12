@@ -12,8 +12,7 @@
           type="primary"
           @click="searchSubmit"
         >
-          <svg-icon icon-class="loading" />
-          查询
+          <svg-icon icon-class="loading" />查询
         </el-button>
         <el-button
           type="primary"
@@ -34,9 +33,7 @@
         slot="option"
         label="选项"
       >
-        <el-button
-          slot-scope="{ row }"
-        >
+        <el-button slot-scope="{ row }">
           {{ row.name }}
         </el-button>
       </el-table-column>
@@ -78,9 +75,7 @@
             slot="option"
             label="选项"
           >
-            <el-button
-              slot-scope="{ row }"
-            >
+            <el-button slot-scope="{ row }">
               {{ row.name }}
             </el-button>
           </el-table-column>
@@ -154,35 +149,43 @@ export default {
         {
           label: '操作',
           width: 380,
-          buttons: [{
-            label: '禁用',
-            click: this.disableTag,
-            ifRender: this.ifRender
-          }, {
-            label: '启用',
-            click: this.ableTag
-          }, {
-            label: '编辑',
-            click: this.editRow
-          }, {
-            label: 'tab',
-            click: this.openDialog
-          }]
+          buttons: [
+            {
+              label: '禁用',
+              click: this.disableTag,
+              ifRender: this.ifRender
+            },
+            {
+              label: '启用',
+              click: this.ableTag
+            },
+            {
+              label: '编辑',
+              click: this.editRow
+            },
+            {
+              label: 'tab',
+              click: this.openDialog
+            }
+          ]
         }
       ],
-      data: [{
-        date: '2016-05-02',
-        name: '王大虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        change: '12%',
-        trend: '10%'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄',
-        change: '-12%',
-        trend: '-10%'
-      }],
+      data: [
+        {
+          date: '2016-05-02',
+          name: '王大虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          change: '12%',
+          trend: '10%'
+        },
+        {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+          change: '-12%',
+          trend: '-10%'
+        }
+      ],
       pagination: {
         currentPage: 1,
         pageSize: 10,
@@ -195,21 +198,45 @@ export default {
       formItems: [
         { type: 'input', label: '账号', value: 'account', clearable: true },
         { type: 'password', label: '密码', value: 'password', clearable: true },
-        { type: 'textarea', label: '备注', value: 'description', clearable: true, rows: '4', resize: 'none' },
+        {
+          type: 'textarea',
+          label: '备注',
+          value: 'description',
+          clearable: true,
+          rows: '4',
+          resize: 'none'
+        },
         { type: 'inputNumber', label: '数字', value: 'number', disabled: true },
-        { type: 'select', label: '角色', value: 'role', clearable: true, list: [{ label: '全部', value: '' }, { label: '超级管理员', value: 'SUPER' }, { label: '管理员', value: 'SUPER_MGR' }], change: this.selectChange },
+        {
+          type: 'select',
+          label: '角色',
+          value: 'role',
+          clearable: true,
+          list: [
+            { label: '全部', value: '' },
+            { label: '超级管理员', value: 'SUPER' },
+            { label: '管理员', value: 'SUPER_MGR' }
+          ],
+          change: this.selectChange
+        },
         { type: 'date', label: '日期', value: 'date', clearable: true },
-        { type: 'datetime', label: '日期时间', value: 'datetime', clearable: true },
-        { type: 'datetimerange', label: '日期时间范围', value: 'datetimerange', clearable: true },
+        {
+          type: 'datetime',
+          label: '日期时间',
+          value: 'datetime',
+          clearable: true
+        },
+        {
+          type: 'datetimerange',
+          label: '日期时间范围',
+          value: 'datetimerange',
+          clearable: true
+        },
         { type: 'slot', value: 'buttons' }
       ],
       rules: {
-        account: [
-          { required: true, message: '请输入账号', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ]
+        account: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       // 弹窗数据
       rowOuterVisible: false,
@@ -307,5 +334,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

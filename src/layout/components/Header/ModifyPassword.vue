@@ -6,6 +6,7 @@
     width="30vw"
     v-on="$listeners"
     @submit="editSubmit"
+    @cancel="cancel"
   >
     <Form
       :ref-obj.sync="ref"
@@ -93,6 +94,9 @@ export default {
         }
         console.log(this.form)
       })
+    },
+    cancel () {
+      this.ref.clearValidate()
     }
   }
 }

@@ -29,11 +29,23 @@ export const constantRoutes = [
       {
         path: '/index',
         name: 'index',
-        component: () => import('@/views/home/index'),
-        meta: {
-          title: '主页',
-          icon: 'iconfont icon-home'
-        }
+        component: () => import('@/views/home/index')
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: '/organization',
+    meta: {
+      title: '企业管理',
+      icon: 'iconfont icon-home'
+    },
+    children: [
+      {
+        path: '/organization',
+        name: 'organization',
+        component: () => import('@/views/organizations/organization')
       }
     ]
   }
@@ -87,10 +99,11 @@ export const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const createRouter = () => new Router({
-  mode: 'history',
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    mode: 'history',
+    routes: constantRoutes
+  })
 
 const router = createRouter()
 

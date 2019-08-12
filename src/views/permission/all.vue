@@ -11,7 +11,7 @@
           size="small"
         >
           超级管理员
-        </el-tag> 能看到
+        </el-tag>能看到
       </div>
       <div
         v-permission="['SUPER_MGR']"
@@ -22,7 +22,7 @@
           size="small"
         >
           管理员
-        </el-tag> 能看到
+        </el-tag>能看到
       </div>
       <div
         v-permission="['SUPER','SUPER_MGR']"
@@ -33,13 +33,13 @@
           size="small"
         >
           超级管理员
-        </el-tag> 和
+        </el-tag>和
         <el-tag
           class="permission-tag"
           size="small"
         >
           管理员
-        </el-tag> 能看到
+        </el-tag>能看到
       </div>
     </div>
     <el-tabs
@@ -81,5 +81,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 </style>
