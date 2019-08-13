@@ -36,10 +36,7 @@
       </el-dropdown>
     </div>
     <UserInfo :outer-visible.sync="userInfoOuterVisible" />
-    <ModifyPassword
-      :outer-visible.sync="modifyPasswordOuterVisible"
-      :form="form"
-    />
+    <ModifyPassword :outer-visible.sync="modifyPasswordOuterVisible" />
   </div>
 </template>
 
@@ -52,8 +49,7 @@ export default {
   data () {
     return {
       userInfoOuterVisible: false,
-      modifyPasswordOuterVisible: false,
-      form: {}
+      modifyPasswordOuterVisible: false
     }
   },
   methods: {
@@ -64,7 +60,6 @@ export default {
         this.userInfoOuterVisible = true
       } else {
         this.modifyPasswordOuterVisible = true
-        this.form = {}
       }
     },
     logout () {

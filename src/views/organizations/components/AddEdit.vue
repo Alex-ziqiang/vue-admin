@@ -1,16 +1,17 @@
 <template>
   <div>
     <Dialog
-      type="add"
+      :type="type"
       :outer-visible="outerVisible"
-      :title="title"
+      :title="titleMap[type]"
       v-on="$listeners"
       @submit="submit"
       @cancel="cancel"
+      @outerOpen="outerOpen"
     >
       <Form
         :ref-obj.sync="ref"
-        :form="form"
+        :form="currentForm"
         :form-items="formItems"
         :rules="rules"
       />
@@ -19,13 +20,14 @@
 </template>
 
 <script>
+import { addOrganization, editOrganization } from '@/api/organization'
 import Dialog from '@/components/Dialog'
 import Form from '@/components/Form'
 export default {
   name: 'AddEdit',
   components: { Form, Dialog },
   props: {
-    title: {
+    type: {
       type: String,
       required: true
     },
@@ -40,7 +42,9 @@ export default {
   },
   data () {
     return {
+      uuid: '',
       ref: null,
+      currentForm: {},
       formItems: [
         { type: 'input', label: '企业名称', value: 'name', clearable: true },
         { type: 'input', label: '企业法人', value: 'legalRepresentative', clearable: true },
@@ -68,16 +72,64 @@ export default {
         contactNumber: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
         ]
+      },
+      titleMap: {
+        add: '新增',
+        edit: '编辑'
       }
     }
   },
   methods: {
+    outerOpen () {
+      if (this.type === 'add') {
+        this.currentForm = {}
+      } else if (this.type === 'edit') {
+        const {
+          name,
+          contactEmail,
+          address,
+          contactNumber,
+          legalRepresentative,
+          organizationContact
+        } = this.form
+        this.uuid = this.form.orgUUID
+        this.currentForm = {
+          name,
+          contactEmail,
+          address,
+          contactNumber,
+          legalRepresentative,
+          organizationContact
+        }
+      }
+    },
+    refresh () {
+      this.$emit('refresh')
+    },
     submit () {
       this.ref.validate(valid => {
         if (!valid) {
           return
         }
-        console.log(this.form)
+        if (this.type === 'add') {
+          addOrganization(this.currentForm).then(() => {
+            this.$message({
+              type: 'success',
+              showClose: true,
+              message: '新增成功'
+            })
+            this.refresh()
+          }).catch(err => console.log(err))
+        } else if (this.type === 'edit') {
+          editOrganization(this.uuid, this.currentForm).then(() => {
+            this.$message({
+              type: 'success',
+              showClose: true,
+              message: '编辑成功'
+            })
+            this.refresh()
+          }).catch(err => console.log(err))
+        }
       })
     },
     cancel () {

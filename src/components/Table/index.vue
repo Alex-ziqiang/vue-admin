@@ -45,8 +45,8 @@
       <el-pagination
         :layout="layout"
         v-bind="pagination"
-        @current-change="handleChangeCurrentChange"
-        @size-change="handleSizeChange"
+        @current-change="currentChange"
+        @size-change="sizeChange"
       />
     </div>
   </div>
@@ -78,10 +78,10 @@ export default {
     }
   },
   methods: {
-    handleChangeCurrentChange (val) {
+    currentChange (val) {
       this.$emit('current-change', val)
     },
-    handleSizeChange (val) {
+    sizeChange (val) {
       this.$emit('size-change', val)
     }
   }

@@ -11,19 +11,20 @@
       :data="data"
       :columns="columns"
       :pagination="pagination"
-      @current-change="onPagination"
+      @current-change="handleCurrentChange"
       @size-change="handleSizeChange"
     />
     <AddEdit
+      :type="type"
       :outer-visible.sync="outerVisible"
-      :title="title"
       :form="form"
+      @refresh="handleOrganizations"
     />
   </div>
 </template>
 
 <script>
-import { getOrganizations } from '@/api/organization'
+import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Table from '@/components/Table'
 import AddEdit from './components/AddEdit'
 export default {
@@ -41,7 +42,7 @@ export default {
         { prop: 'contactNumber', label: '联系电话' },
         {
           label: '操作',
-          buttons: [{ label: '编辑', click: this.editRow }]
+          buttons: [{ label: '编辑', click: this.editRow }, { label: '删除', click: this.deleteRow }]
         }
       ],
       pagination: {
@@ -50,32 +51,50 @@ export default {
         total: 0
       },
       outerVisible: false,
-      title: '',
+      type: '',
       form: {}
     }
   },
   created () {
-    this.handleGetOrganizations()
+    this.handleOrganizations()
   },
   methods: {
-    onPagination (val) {
-      console.log(val)
+    handleCurrentChange (val) {
+      this.pagination.currentPage = val
+      this.handleOrganizations()
     },
     handleSizeChange (val) {
-      console.log(val)
+      this.pagination.currentPage = 1
+      this.pagination.pageSize = val
+      this.handleOrganizations()
     },
     addRow () {
       this.outerVisible = true
-      this.title = '新增'
-      this.form = {}
+      this.type = 'add'
     },
     editRow (row) {
       this.outerVisible = true
-      this.title = '编辑'
+      this.type = 'edit'
       this.form = row
     },
+    deleteRow (row) {
+      this.$confirm('确定删除该企业吗？', {
+        type: 'warning',
+        showClose: false,
+        closeOnClickModal: false
+      }).then(() => {
+        deleteOrganization(row.orgUUID).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          // 刷新列表
+          this.handleOrganizations()
+        })
+      }).catch(err => console.log(err))
+    },
     // 获取运营企业
-    handleGetOrganizations () {
+    handleOrganizations () {
       const params = { ...this.pagination }
       this.tableLoading = true
       getOrganizations(params)

@@ -21,7 +21,7 @@ module.exports = {
         }
       },
       '/api': {
-        target: 'https://dev-tsp.bigdatahd.cn:30001',
+        target: 'https://test-tsp.bigdatahd.cn:30001',
         changeOrigin: true
       }
     }

@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :visible="outerVisible"
     :close-on-click-modal="type === 'normal'"
-    @open="outOpen"
+    @open="outerOpen"
     @close="outerClose"
   >
     <!-- inner  dialog -->
@@ -114,7 +114,7 @@ export default {
     innerClose () {
       this.$emit('update:innerVisible', false)
     },
-    outOpen () {
+    outerOpen () {
       this.$emit('outerOpen')
     },
     tabClick (params) {
@@ -122,11 +122,12 @@ export default {
       this.$emit('update:selectedTab', params.name)
     },
     cancel () {
-      this.outerClose()
       this.$emit('cancel')
+      this.outerClose()
     },
     submit () {
       this.$emit('submit')
+      this.outerClose()
     }
   }
 }
