@@ -127,7 +127,6 @@ export default {
     },
     submit () {
       this.$emit('submit')
-      this.outerClose()
     }
   }
 }

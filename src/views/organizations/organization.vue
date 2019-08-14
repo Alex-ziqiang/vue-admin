@@ -14,11 +14,11 @@
       @current-change="handleCurrentChange"
       @size-change="handleSizeChange"
     />
-    <AddEdit
+    <OrgAddEdit
       :type="type"
       :outer-visible.sync="outerVisible"
       :form="form"
-      @refresh="handleOrganizations"
+      @refresh="refresh"
     />
   </div>
 </template>
@@ -26,10 +26,10 @@
 <script>
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Table from '@/components/Table'
-import AddEdit from './components/AddEdit'
+import OrgAddEdit from './components/OrgAddEdit'
 export default {
   name: 'Organization',
-  components: { Table, AddEdit },
+  components: { Table, OrgAddEdit },
   data () {
     return {
       tableLoading: false,
@@ -59,6 +59,10 @@ export default {
     this.handleOrganizations()
   },
   methods: {
+    refresh () {
+      this.outerVisible = false
+      this.handleOrganizations()
+    },
     handleCurrentChange (val) {
       this.pagination.currentPage = val
       this.handleOrganizations()
