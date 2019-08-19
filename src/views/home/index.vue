@@ -7,7 +7,7 @@
       :inline="true"
       :rules="rules"
     >
-      <template slot="buttons">
+      <!-- <template slot="buttons">
         <el-button
           type="primary"
           @click="searchSubmit"
@@ -20,7 +20,7 @@
         >
           新增
         </el-button>
-      </template>
+      </template>-->
     </Form>
     <Table
       :data="data"
@@ -198,14 +198,15 @@ export default {
       formItems: [
         { type: 'input', label: '账号', value: 'account', clearable: true },
         { type: 'password', label: '密码', value: 'password', clearable: true },
-        {
-          type: 'textarea',
-          label: '备注',
-          value: 'description',
-          clearable: true,
-          rows: '4',
-          resize: 'none'
-        },
+        // {
+        //   type: 'textarea',
+        //   label: '备注',
+        //   value: 'description',
+        //   clearable: true,
+        //   rows: '4',
+        //   resize: 'none',
+        //   layout: 8
+        // },
         { type: 'inputNumber', label: '数字', value: 'number', disabled: true },
         {
           type: 'select',
@@ -230,9 +231,16 @@ export default {
           type: 'datetimerange',
           label: '日期时间范围',
           value: 'datetimerange',
-          clearable: true
+          clearable: true,
+          layout: 12
         },
-        { type: 'slot', value: 'buttons' }
+        {
+          type: 'buttons',
+          buttons: [
+            { label: '查询', type: 'primary', click: this.searchSubmit },
+            { label: '新增', type: 'primary', click: this.add }
+          ]
+        }
       ],
       rules: {
         account: [{ required: true, message: '请输入账号', trigger: 'blur' }],
