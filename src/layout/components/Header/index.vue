@@ -4,8 +4,12 @@
       <span class="web-title">管理平台</span>
     </div>
     <div class="right">
+      <Screenfull
+        id="screenfull"
+        class="right-item hover-effect"
+      />
       <el-dropdown
-        class="right-item"
+        class="right-item hover-effect"
         @command="handleCommand"
       >
         <div class="avatar-wrapper">
@@ -43,9 +47,10 @@
 <script>
 import UserInfo from './UserInfo'
 import ModifyPassword from './ModifyPassword'
+import Screenfull from '@/components/Screenfull'
 export default {
   name: 'Header',
-  components: { UserInfo, ModifyPassword },
+  components: { UserInfo, ModifyPassword, Screenfull },
   data () {
     return {
       userInfoOuterVisible: false,
@@ -96,6 +101,18 @@ export default {
   }
   .right {
     float: right;
+    .right-item {
+      display: inline-block;
+      padding: 0 8px;
+      height: 100%;
+      font-size: 20px;
+      color: #FFF;
+      vertical-align: middle;
+
+      &.hover-effect {
+        cursor: pointer;
+      }
+    }
     .avatar-wrapper {
       height: 100%;
       line-height: 62px;
