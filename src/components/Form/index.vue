@@ -4,7 +4,7 @@
     justify="center"
     type="flex"
   >
-    <el-col :span="22">
+    <el-col :span="24">
       <el-form
         ref="form"
         class="form"
@@ -18,7 +18,7 @@
           <el-col
             v-for="(item, index) in formItems"
             :key="index"
-            :md="inline ? item.span || 8 : 24"
+            :md="inline ? item.span || 6 : 24"
             :xs="24"
           >
             <el-form-item
@@ -183,6 +183,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .button-wrapper {
   float: right;

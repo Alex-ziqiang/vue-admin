@@ -2,6 +2,7 @@
   <el-dialog
     v-bind="$attrs"
     :visible="outerVisible"
+    :width="outerWidth"
     :close-on-click-modal="type === 'normal'"
     @open="outerOpen"
     @close="outerClose"
@@ -10,7 +11,7 @@
     <el-dialog
       v-if="showInner"
       append-to-body
-      :width="innerWith"
+      :width="innerWidth"
       :title="innerTitle"
       :visible="innerVisible"
       @close="innerClose"
@@ -76,11 +77,15 @@ export default {
       type: Boolean,
       required: true
     },
+    outerWidth: {
+      type: String,
+      default: '30vw'
+    },
     innerVisible: {
       type: Boolean,
       default: false
     },
-    innerWith: {
+    innerWidth: {
       type: String,
       default: '30vw'
     },

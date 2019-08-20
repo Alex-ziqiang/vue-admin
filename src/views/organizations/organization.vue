@@ -1,29 +1,39 @@
 <template>
-  <div>
-    <Form
-      :form="form"
-      :form-items="formItems"
-      :inline="true"
-      :buttons="buttons"
-    />
-    <Table
-      :loading="tableLoading"
-      :data="data"
-      :columns="columns"
-      :pagination="pagination"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    />
-    <OrgDetail
-      :outer-visible.sync="detailVisible"
-      :form="detailForm"
-    />
-    <OrgAddEdit
-      :type="type"
-      :outer-visible.sync="addEditVisible"
-      :form="addEditForm"
-      @refresh="refresh"
-    />
+  <div class="page-wrapper">
+    <el-card>
+      <div
+        slot="header"
+        class="clearfix"
+      >
+        <span>查询</span>
+      </div>
+      <Form
+        :form="form"
+        :form-items="formItems"
+        :inline="true"
+        :buttons="buttons"
+      />
+    </el-card>
+    <el-card>
+      <Table
+        :loading="tableLoading"
+        :data="data"
+        :columns="columns"
+        :pagination="pagination"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+      />
+      <OrgDetail
+        :outer-visible.sync="detailVisible"
+        :form="detailForm"
+      />
+      <OrgAddEdit
+        :type="type"
+        :outer-visible.sync="addEditVisible"
+        :form="addEditForm"
+        @refresh="refresh"
+      />
+    </el-card>
   </div>
 </template>
 
@@ -66,9 +76,9 @@ export default {
         }
       ],
       buttons: [
-        { label: '查询', type: 'primary', click: this.searchSubmit },
+        { label: '查询', type: 'primary', icon: 'el-icon-search', click: this.searchSubmit },
         { label: '重置', type: 'info', click: this.reset },
-        { label: '新增', type: 'success', click: this.addRow }
+        { label: '新增', type: 'success', icon: 'el-icon-plus', click: this.handleAdd }
       ],
       tableLoading: false,
       totalCount: '',
@@ -77,7 +87,7 @@ export default {
         {
           label: '企业名称',
           buttons: [
-            { type: 'text', prop: 'name', click: this.detailRow }
+            { type: 'text', prop: 'name', click: this.handleDetail }
           ]
         },
         { label: '企业法人', prop: 'legalRepresentative' },
@@ -86,8 +96,8 @@ export default {
         {
           label: '操作',
           buttons: [
-            { label: '编辑', click: this.editRow },
-            { label: '删除', click: this.deleteRow }
+            { type: 'text', label: '编辑', click: this.handleEdit },
+            { type: 'text', label: '删除', click: this.handleDelete }
           ]
         }
       ],
@@ -120,20 +130,20 @@ export default {
       this.pagination.pageSize = val
       this.handleOrganizations()
     },
-    addRow () {
+    handleAdd () {
       this.addEditVisible = true
       this.type = 'add'
     },
-    detailRow (row) {
+    handleDetail (row) {
       this.detailVisible = true
       this.detailForm = row
     },
-    editRow (row) {
+    handleEdit (row) {
       this.addEditVisible = true
       this.type = 'edit'
       this.addEditForm = row
     },
-    deleteRow (row) {
+    handleDelete (row) {
       this.$confirm('确定删除该企业吗？', {
         type: 'warning',
         showClose: false,

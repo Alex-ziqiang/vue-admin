@@ -29,7 +29,10 @@ export const constantRoutes = [
       {
         path: '/index',
         name: 'index',
-        component: () => import('@/views/home/index')
+        component: () => import('@/views/home/index'),
+        meta: {
+          // title: '主页'
+        }
       }
     ]
   },
@@ -45,7 +48,10 @@ export const constantRoutes = [
       {
         path: '/organization',
         name: 'organization',
-        component: () => import('@/views/organizations/organization')
+        component: () => import('@/views/organizations/organization'),
+        meta: {
+          title: '企业管理'
+        }
       }
     ]
   }

@@ -1,6 +1,8 @@
 @import "~@/styles/variables.scss";
 .menu-wrapper {
+  position: relative;
   background-color: $menuBg;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
   // 如果没有此样式的话  折叠有子级菜单的父菜单文字是不会隐藏的
   .el-menu--collapse .el-menu-item span,
     .el-menu--collapse .el-submenu .el-submenu__title span,
@@ -11,6 +13,9 @@
     visibility: hidden;
     display: inline-block;
     }
+  .el-menu {
+    border-right: none;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: $menuWidth;
     .el-menu-item:not(.is-active):hover,.el-submenu__title:hover{
@@ -30,4 +35,29 @@
   .el-breadcrumb__inner {
     color: $breadcrumbText;
   }
+}
+.page-wrapper {
+  .el-card {
+    margin: 10px 0;
+    .el-card__header {
+      background: #f4f8fa;
+      padding: 12px 20px;
+      font-size: 16px;
+      color: #22262f;
+      font-weight: 600;
+    }
+  }
+}
+.el-table thead>tr>th {
+  color: rgba(0,0,0,.85);
+  font-weight: 600;
+  text-align: left;
+  background: #fafafa;
+}
+.el-pagination {
+  float: right;
+  margin: 16px 0;
+}
+.el-button {
+  padding: 10px 22px;
 }

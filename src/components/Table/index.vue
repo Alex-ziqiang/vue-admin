@@ -7,6 +7,7 @@
       <el-table
         v-bind="$attrs"
         :data="data"
+        stripe
       >
         <template v-for="(column, index) in columns">
           <slot
