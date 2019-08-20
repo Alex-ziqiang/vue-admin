@@ -153,8 +153,8 @@ export default {
     },
     // 获取运营企业
     handleOrganizations () {
-      const params = { ...this.form, ...this.pagination }
       this.tableLoading = true
+      const params = { ...this.form, ...this.pagination }
       getOrganizations(params)
         .then(res => {
           this.tableLoading = false

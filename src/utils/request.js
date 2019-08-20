@@ -42,7 +42,6 @@ service.interceptors.request.use(
       if (legitimacy(config.params)) {
         // 去除前后空格 和 空属性
         config.params = rebuildObj(config.params)
-        store.commit('SET_LOADING', true)
       } else {
         // 包含 & 字符取消请求
         showMessage('&为非法字符,请重新输入')
@@ -54,8 +53,20 @@ service.interceptors.request.use(
         return config
       }
     } else {
-      // 去除前后空格 和 空属性
-      config.data = rebuildObj(config.data)
+      // 不包含 & 字符
+      if (legitimacy(config.data)) {
+        // 去除前后空格 和 空属性
+        config.data = rebuildObj(config.data)
+      } else {
+        // 包含 & 字符取消请求
+        showMessage('&为非法字符,请重新输入')
+        const CancelToken = axios.CancelToken
+        const source = CancelToken.source()
+        config.cancelToken = source.token
+        // 取消请求
+        source.cancel()
+        return config
+      }
       // 上传文件
       if (isFormData(config.data)) {
         config.headers['Content-Type'] = 'multipart/form-data'
@@ -80,7 +91,6 @@ service.interceptors.request.use(
   error => {
     // Do something with request error
     // console.log(error) // for debug
-    store.commit('SET_LOADING', false)
     return Promise.reject(error)
   }
 )
@@ -88,16 +98,12 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
-    // loading
-    store.commit('SET_LOADING', false)
     return response.data
   },
   error => {
     /**
      * 通过 xmlhttprequest 来状态码标识error
      */
-    // loading
-    store.commit('SET_LOADING', false)
     // console.log('error：' + error.response.data.errorMsg, error.response.status) // for debug
     if (error && error.response) {
       const data = error.response.data
