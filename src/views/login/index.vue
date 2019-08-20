@@ -47,7 +47,7 @@ export default {
       loginForm: {},
       loginFormItems: [
         { type: 'input', label: '账号', value: 'account', clearable: true },
-        { type: 'password', label: '密码', value: 'password', clearable: true },
+        { type: 'password', label: '密码', value: 'password', showPassword: true, clearable: true },
         { type: 'slot', label: '验证码', value: 'authCode' },
         { type: 'slot', value: 'submit' }
       ],
