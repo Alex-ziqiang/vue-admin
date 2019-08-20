@@ -25,7 +25,7 @@
                 v-bind="button"
                 @click="button.click(row)"
               >
-                {{ button.label }}
+                {{ button.label || row[button.prop] }}
               </el-button>
             </template>
           </el-table-column>

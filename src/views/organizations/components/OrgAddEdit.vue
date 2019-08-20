@@ -1,22 +1,20 @@
 <template>
-  <div>
-    <Dialog
-      :type="type"
-      :outer-visible="outerVisible"
-      :title="titleMap[type]"
-      v-on="$listeners"
-      @submit="submit"
-      @cancel="cancel"
-      @outerOpen="outerOpen"
-    >
-      <Form
-        :ref-obj.sync="ref"
-        :form="currentForm"
-        :form-items="formItems"
-        :rules="rules"
-      />
-    </Dialog>
-  </div>
+  <Dialog
+    :type="type"
+    :outer-visible="outerVisible"
+    :title="titleMap[type]"
+    v-on="$listeners"
+    @submit="submit"
+    @cancel="cancel"
+    @outerOpen="outerOpen"
+  >
+    <Form
+      :ref-obj.sync="ref"
+      :form="currentForm"
+      :form-items="formItems"
+      :rules="rules"
+    />
+  </Dialog>
 </template>
 
 <script>
@@ -24,7 +22,7 @@ import { addOrganization, editOrganization } from '@/api/organization'
 import Dialog from '@/components/Dialog'
 import Form from '@/components/Form'
 export default {
-  name: 'AddEdit',
+  name: 'OrgAddEdit',
   components: { Form, Dialog },
   props: {
     type: {

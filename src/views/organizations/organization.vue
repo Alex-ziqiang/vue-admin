@@ -14,9 +14,13 @@
       @current-change="handleCurrentChange"
       @size-change="handleSizeChange"
     />
+    <OrgDetail
+      :outer-visible.sync="detailVisible"
+      :form="detailForm"
+    />
     <OrgAddEdit
       :type="type"
-      :outer-visible.sync="outerVisible"
+      :outer-visible.sync="addEditVisible"
       :form="addEditForm"
       @refresh="refresh"
     />
@@ -27,10 +31,11 @@
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
+import OrgDetail from './components/OrgDetail'
 import OrgAddEdit from './components/OrgAddEdit'
 export default {
   name: 'Organization',
-  components: { Form, Table, OrgAddEdit },
+  components: { Form, Table, OrgDetail, OrgAddEdit },
   data () {
     return {
       form: {},
@@ -69,10 +74,15 @@ export default {
       totalCount: '',
       data: [],
       columns: [
-        { prop: 'name', label: '企业名称' },
+        {
+          label: '企业名称',
+          buttons: [
+            { type: 'text', prop: 'name', click: this.detailRow }
+          ]
+        },
         { label: '企业法人', prop: 'legalRepresentative' },
         { label: '企业联系人', prop: 'organizationContact' },
-        { prop: 'contactNumber', label: '联系电话' },
+        { label: '联系电话', prop: 'contactNumber' },
         {
           label: '操作',
           buttons: [
@@ -86,9 +96,11 @@ export default {
         pageSize: 10,
         total: 0
       },
-      outerVisible: false,
       type: '',
-      addEditForm: {}
+      addEditVisible: false,
+      addEditForm: {},
+      detailVisible: false,
+      detailForm: {}
     }
   },
   created () {
@@ -96,7 +108,7 @@ export default {
   },
   methods: {
     refresh () {
-      this.outerVisible = false
+      this.addEditVisible = false
       this.handleOrganizations()
     },
     handleCurrentChange (val) {
@@ -109,11 +121,15 @@ export default {
       this.handleOrganizations()
     },
     addRow () {
-      this.outerVisible = true
+      this.addEditVisible = true
       this.type = 'add'
     },
+    detailRow (row) {
+      this.detailVisible = true
+      this.detailForm = row
+    },
     editRow (row) {
-      this.outerVisible = true
+      this.addEditVisible = true
       this.type = 'edit'
       this.addEditForm = row
     },
