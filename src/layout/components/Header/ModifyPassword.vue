@@ -93,7 +93,7 @@ export default {
       })
     },
     cancel () {
-      this.ref.clearValidate()
+      this.ref.resetFields()
     }
   }
 }
