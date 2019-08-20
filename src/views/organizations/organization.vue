@@ -1,11 +1,11 @@
 <template>
   <div>
-    <el-button
-      type="primary"
-      @click="addRow"
-    >
-      新增
-    </el-button>
+    <Form
+      :form="form"
+      :form-items="formItems"
+      :inline="true"
+      :buttons="buttons"
+    />
     <Table
       :loading="tableLoading"
       :data="data"
@@ -17,7 +17,7 @@
     <OrgAddEdit
       :type="type"
       :outer-visible.sync="outerVisible"
-      :form="form"
+      :form="addEditForm"
       @refresh="refresh"
     />
   </div>
@@ -25,13 +25,46 @@
 
 <script>
 import { getOrganizations, deleteOrganization } from '@/api/organization'
+import Form from '@/components/Form'
 import Table from '@/components/Table'
 import OrgAddEdit from './components/OrgAddEdit'
 export default {
   name: 'Organization',
-  components: { Table, OrgAddEdit },
+  components: { Form, Table, OrgAddEdit },
   data () {
     return {
+      form: {},
+      formItems: [
+        {
+          type: 'input',
+          label: '企业名称',
+          value: 'name',
+          clearable: true
+        },
+        {
+          type: 'input',
+          label: '企业法人',
+          value: 'legalRepresentative',
+          clearable: true
+        },
+        {
+          type: 'input',
+          label: '企业联系人',
+          value: 'organizationContact',
+          clearable: true
+        },
+        {
+          type: 'input',
+          label: '联系人电话',
+          value: 'contactNumber',
+          clearable: true
+        }
+      ],
+      buttons: [
+        { label: '查询', type: 'primary', click: this.searchSubmit },
+        { label: '重置', type: 'info', click: this.reset },
+        { label: '新增', type: 'success', click: this.addRow }
+      ],
       tableLoading: false,
       totalCount: '',
       data: [],
@@ -42,7 +75,10 @@ export default {
         { prop: 'contactNumber', label: '联系电话' },
         {
           label: '操作',
-          buttons: [{ label: '编辑', click: this.editRow }, { label: '删除', click: this.deleteRow }]
+          buttons: [
+            { label: '编辑', click: this.editRow },
+            { label: '删除', click: this.deleteRow }
+          ]
         }
       ],
       pagination: {
@@ -52,7 +88,7 @@ export default {
       },
       outerVisible: false,
       type: '',
-      form: {}
+      addEditForm: {}
     }
   },
   created () {
@@ -79,27 +115,29 @@ export default {
     editRow (row) {
       this.outerVisible = true
       this.type = 'edit'
-      this.form = row
+      this.addEditForm = row
     },
     deleteRow (row) {
       this.$confirm('确定删除该企业吗？', {
         type: 'warning',
         showClose: false,
         closeOnClickModal: false
-      }).then(() => {
-        deleteOrganization(row.orgUUID).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功'
+      })
+        .then(() => {
+          deleteOrganization(row.orgUUID).then(() => {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            // 刷新列表
+            this.handleOrganizations()
           })
-          // 刷新列表
-          this.handleOrganizations()
         })
-      }).catch(err => console.log(err))
+        .catch(err => console.log(err))
     },
     // 获取运营企业
     handleOrganizations () {
-      const params = { ...this.pagination }
+      const params = { ...this.form, ...this.pagination }
       this.tableLoading = true
       getOrganizations(params)
         .then(res => {
@@ -110,6 +148,14 @@ export default {
         .catch(() => {
           this.tableLoading = false
         })
+    },
+    // 搜索
+    searchSubmit () {
+      this.pagination.currentPage = 1
+      this.handleOrganizations()
+    },
+    reset () {
+      this.form = {}
     }
   }
 }

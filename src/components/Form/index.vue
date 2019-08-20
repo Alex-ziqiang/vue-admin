@@ -18,7 +18,7 @@
           <el-col
             v-for="(item, index) in formItems"
             :key="index"
-            :md="inline ? item.layout || 8 : 24"
+            :md="inline ? item.span || 8 : 24"
             :xs="24"
           >
             <el-form-item
@@ -98,20 +98,21 @@
               />
             </el-form-item>
             <!-- 按钮 -->
-            <el-form-item
-              v-if="item.type === 'buttons'"
-            >
-              <el-button
-                v-for="(button, number) in item.buttons"
-                :key="number"
-                v-bind="button"
-                @click="button.click"
-              >
-                {{ button.label }}
-              </el-button>
-            </el-form-item>
           </el-col>
         </el-row>
+        <div
+          v-if="buttons.length !== 0"
+          class="button-wrapper"
+        >
+          <el-button
+            v-for="(button, index) in buttons"
+            :key="index"
+            v-bind="button"
+            @click="button.click"
+          >
+            {{ button.label }}
+          </el-button>
+        </div>
       </el-form>
     </el-col>
   </el-row>
@@ -140,6 +141,12 @@ export default {
     formItems: {
       type: Array,
       required: true
+    },
+    buttons: {
+      type: Array,
+      default: () => {
+        return []
+      }
     },
     valueFormat: {
       type: String,
@@ -176,3 +183,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.button-wrapper {
+  float: right;
+}
+</style>

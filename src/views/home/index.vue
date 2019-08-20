@@ -6,6 +6,7 @@
       :form-items="formItems"
       :inline="true"
       :rules="rules"
+      :buttons="buttons"
     >
       <!-- <template slot="buttons">
         <el-button
@@ -205,7 +206,7 @@ export default {
         //   clearable: true,
         //   rows: '4',
         //   resize: 'none',
-        //   layout: 8
+        //   span: 8
         // },
         { type: 'inputNumber', label: '数字', value: 'number', disabled: true },
         {
@@ -232,20 +233,17 @@ export default {
           label: '日期时间范围',
           value: 'datetimerange',
           clearable: true,
-          layout: 12
-        },
-        {
-          type: 'buttons',
-          buttons: [
-            { label: '查询', type: 'primary', click: this.searchSubmit },
-            { label: '新增', type: 'primary', click: this.add }
-          ]
+          span: 12
         }
       ],
       rules: {
         account: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
+      buttons: [
+        { label: '查询', type: 'primary', click: this.searchSubmit },
+        { label: '新增', type: 'primary', click: this.add }
+      ],
       // 弹窗数据
       rowOuterVisible: false,
       rowInnerVisible: false,
