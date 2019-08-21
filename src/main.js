@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
-import ElementUI from 'element-ui'
 import './styles/element-variables.scss'
 import './styles/index.scss' // global css
 import './assets/iconfont/iconfont.css'
@@ -9,8 +8,8 @@ import router from './router'
 import store from './store'
 import './icons' // icon
 import './permission' // permission control
+import './plugins/element.js'
 
-Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 new Vue({
