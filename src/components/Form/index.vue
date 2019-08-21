@@ -16,8 +16,8 @@
       >
         <el-row :gutter="20">
           <el-col
-            v-for="(item, index) in formItems"
-            :key="index"
+            v-for="item in formItems"
+            :key="item.label"
             :md="inline ? item.span || 6 : 24"
             :xs="24"
           >
@@ -64,8 +64,8 @@
                 @change="item.change(form[item.value])"
               >
                 <el-option
-                  v-for="(childItem, childIndex) in item.list"
-                  :key="childIndex"
+                  v-for="childItem in item.list"
+                  :key="childItem.label"
                   :label="childItem.label"
                   :value="childItem.value"
                 />
@@ -105,8 +105,8 @@
           class="button-wrapper"
         >
           <el-button
-            v-for="(button, index) in buttons"
-            :key="index"
+            v-for="button in buttons"
+            :key="button.label"
             v-bind="button"
             @click="button.click"
           >

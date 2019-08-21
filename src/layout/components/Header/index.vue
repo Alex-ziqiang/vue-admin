@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrapper">
     <div class="left">
-      <span class="web-title">管理平台</span>
+      <span class="web-title">vue-admin</span>
     </div>
     <div class="right">
       <Screenfull
@@ -86,16 +86,17 @@ export default {
   overflow: hidden;
   position: relative;
   background: #1d2b36;
+  box-shadow: 0 2px 6px rgba(0, 21, 41, 0.35);
   .left {
     display: inline-block;
     height: 100%;
     line-height: 62px;
     .web-title {
       font-size: 23px;
-      color: #fff;
       margin-left: 66px;
-      letter-spacing: 1px;
-      line-height: 1;
+      color: #fff;
+      font-weight: 600;
+      font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
       vertical-align: middle;
     }
   }

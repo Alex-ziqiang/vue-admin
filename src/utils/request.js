@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import { guid, rebuildObj, legitimacy, isFormData } from '@/utils/index'
+import { guid, rebuildObj, legitimacy, isFormData } from '@/utils'
 import { getItem } from '@/utils/auth'
 import { getSign, postSign } from '@/utils/sign'
 import store from '@/store'
-import router from '@/router/index'
+import router from '@/router'
 
 const isSign = true // 开启关闭sign签名验证
 const securityKey = 'U6#bs7$s'// 后端提供安全码

@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import formValidate from '@/utils/validates'
 import Form from '@/components/Form'
 export default {
   name: 'Login',
@@ -46,21 +47,47 @@ export default {
       ref: null,
       loginForm: {},
       loginFormItems: [
-        { type: 'input', label: '账号', value: 'account', clearable: true },
-        { type: 'password', label: '密码', value: 'password', showPassword: true, clearable: true },
-        { type: 'slot', label: '验证码', value: 'authCode' },
-        { type: 'slot', value: 'submit' }
+        {
+          type: 'input',
+          label: '账号',
+          value: 'account',
+          clearable: true
+        },
+        {
+          type: 'password',
+          label: '密码',
+          value: 'password',
+          showPassword: true,
+          clearable: true
+        },
+        {
+          type: 'slot',
+          label: '验证码',
+          value: 'authCode'
+        },
+        {
+          type: 'slot',
+          value: 'submit'
+        }
       ],
       loginRules: {
         account: [
-          { required: true, message: '请输入账号', trigger: 'blur' }
+          {
+            validator: formValidate('validateAccount'),
+            trigger: 'blur'
+          }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          {
+            validator: formValidate('validatePassword'),
+            trigger: 'blur'
+          }
         ],
         authCode: [
-          { required: true, message: '请输入验证码', trigger: 'blur' },
-          { max: 4, min: 4, message: '请输入4位验证码', trigger: 'blur' }
+          {
+            validator: formValidate('validateAuthCode'),
+            trigger: 'blur'
+          }
         ]
       },
       time: '',
@@ -80,8 +107,9 @@ export default {
       this.ref.validate(valid => {
         if (valid) {
           this.loading = true
-          const data = { ...this.loginForm, 'authCodeUUID': this.time }
-          this.$store.dispatch('manager/handleLogin', data)
+          const data = { ...this.loginForm, authCodeUUID: this.time }
+          this.$store
+            .dispatch('manager/handleLogin', data)
             .then(res => {
               this.$router.push('/index')
               this.loading = false
