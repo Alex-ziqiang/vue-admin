@@ -16,6 +16,7 @@
 import { mapGetters } from 'vuex'
 import Form from '@/components/Form'
 import Dialog from '@/components/Dialog'
+import formatFiled from '@/utils/formatFiled'
 export default {
   name: 'UserInfo',
   components: { Form, Dialog },
@@ -29,7 +30,7 @@ export default {
     return {
       formItems: [
         { type: 'detail', label: '账号', value: 'userName' },
-        { type: 'detail', label: '角色', value: 'roleType' },
+        { type: 'detail', label: '角色', value: 'roleType', formatFiled },
         { type: 'detail', label: '手机号码', value: 'mobile' }
       ]
     }

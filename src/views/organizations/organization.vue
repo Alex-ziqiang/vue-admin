@@ -118,7 +118,6 @@ export default {
     this.handleOrganizations()
   },
   methods: {
-    formatContext,
     refresh () {
       this.addEditVisible = false
       this.handleOrganizations()

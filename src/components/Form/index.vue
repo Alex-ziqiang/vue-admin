@@ -32,7 +32,7 @@
               </template>
               <!-- 详情项 -->
               <span v-if="item.type === 'detail'">
-                {{ form[item.value] }}
+                {{ item.formatFiled ? item.formatFiled(item.value, form[item.value]) : form[item.value] }}
               </span>
               <!-- 普通输入框 -->
               <el-input
