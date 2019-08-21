@@ -9,20 +9,20 @@
         :data="data"
         stripe
       >
-        <template v-for="(column, index) in columns">
+        <template v-for="column in columns">
           <slot
             v-if="column.slot && !column.hidden"
             :name="column.slot"
           />
           <el-table-column
             v-if="column.buttons && !column.hidden"
-            :key="index"
+            :key="column.label"
             v-bind="column"
           >
             <template v-slot="{row}">
               <el-button
-                v-for="(button, number) in column.buttons.filter(button => (!button.ifRender || button.ifRender(row)))"
-                :key="number"
+                v-for="button in column.buttons.filter(button => (!button.ifRender || button.ifRender(row)))"
+                :key="button.label"
                 v-bind="button"
                 @click="button.click(row)"
               >
@@ -32,7 +32,7 @@
           </el-table-column>
           <el-table-column
             v-else-if="!column.hidden"
-            :key="index"
+            :key="column.label"
             v-bind="column"
             :hidden-overflow-tooltip="true"
           />
