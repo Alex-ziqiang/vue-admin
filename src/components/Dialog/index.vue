@@ -51,7 +51,7 @@
       v-if="type === 'add' || type === 'edit'"
       slot="footer"
     >
-      <el-button @click="cancel">
+      <el-button @click="outerClose">
         取消
       </el-button>
       <el-button
@@ -114,6 +114,7 @@ export default {
   },
   methods: {
     outerClose () {
+      this.$emit('cancel')
       this.$emit('update:outerVisible', false)
     },
     innerClose () {
@@ -125,10 +126,6 @@ export default {
     tabClick (params) {
       this.$emit('updateTab', params.name)
       this.$emit('update:selectedTab', params.name)
-    },
-    cancel () {
-      this.$emit('cancel')
-      this.outerClose()
     },
     submit () {
       this.$emit('submit')

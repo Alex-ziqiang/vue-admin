@@ -61,3 +61,18 @@
   float: right;
   margin: 16px 0;
 }
+.el-dialog {
+  .el-dialog__header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 4px 4px 0 0;
+  }
+  .el-dialog__body {
+    padding: 22px 28px 0;
+  }
+  .el-dialog__footer {
+    padding: 10px 16px;
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+  }
+}
