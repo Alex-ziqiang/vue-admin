@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/layout/index'
+import Layout from '@/layout'
 
 Vue.use(Router)
 
@@ -8,7 +8,7 @@ export const constantRoutes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/views/login'),
     hidden: true
   },
   {
@@ -29,7 +29,7 @@ export const constantRoutes = [
       {
         path: '/index',
         name: 'index',
-        component: () => import('@/views/home/index'),
+        component: () => import('@/views/home'),
         meta: {
           // title: '主页'
         }

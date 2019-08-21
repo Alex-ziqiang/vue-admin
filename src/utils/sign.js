@@ -1,4 +1,4 @@
-import { trim } from '@/utils/index'
+import { trim } from '@/utils'
 import { Base64 } from 'js-base64'
 import sha1 from 'sha1'
 

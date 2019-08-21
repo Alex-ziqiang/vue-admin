@@ -1,7 +1,7 @@
 import router from './router'
 import store from '@/store'
 import { getItem } from '@/utils/auth'
-import { isEmptyObj } from '@/utils/index'
+import { isEmptyObj } from '@/utils'
 
 const whiteList = ['/login'] // no redirect whitelist
 

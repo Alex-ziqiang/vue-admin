@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import formatContext from '@/utils/formatTable.js'
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
@@ -92,7 +93,7 @@ export default {
         },
         { label: '企业法人', prop: 'legalRepresentative' },
         { label: '企业联系人', prop: 'organizationContact' },
-        { label: '联系电话', prop: 'contactNumber' },
+        { label: '联系电话', prop: 'contactNumber', formatter: formatContext },
         {
           label: '操作',
           buttons: [
@@ -117,6 +118,7 @@ export default {
     this.handleOrganizations()
   },
   methods: {
+    formatContext,
     refresh () {
       this.addEditVisible = false
       this.handleOrganizations()
