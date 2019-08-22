@@ -19,6 +19,7 @@
           :label="item.label"
           :class="item.className"
         >
+          <slot />
           <!-- solt -->
           <template v-if="item.type === 'slot'">
             <slot :name="item.value" />

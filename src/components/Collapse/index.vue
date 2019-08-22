@@ -1,7 +1,7 @@
 <template>
   <el-collapse
-    :value="value"
     v-bind="$attrs"
+    v-on="$listeners"
   >
     <el-row :gutter="20">
       <el-col
@@ -31,10 +31,6 @@ export default {
   name: 'Collapse',
   components: { Form },
   props: {
-    value: {
-      type: Array,
-      required: true
-    },
     collapseItems: {
       type: Array,
       required: true

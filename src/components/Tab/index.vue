@@ -1,7 +1,6 @@
 <template>
   <el-tabs
     :value="value"
-    :type="type"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -24,10 +23,6 @@ export default {
   name: 'Tab',
   props: {
     value: {
-      type: String,
-      required: true
-    },
-    type: {
       type: String,
       required: true
     },

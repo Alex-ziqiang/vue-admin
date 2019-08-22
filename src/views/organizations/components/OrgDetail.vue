@@ -6,7 +6,7 @@
     v-on="$listeners"
   >
     <Collapse
-      v-model="activeNames"
+      :value="activeNames"
       :collapse-items="collapseItems"
       :form="form"
     />
