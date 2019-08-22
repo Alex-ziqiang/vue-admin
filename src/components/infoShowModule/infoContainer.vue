@@ -34,7 +34,6 @@
             <!--v-for 每种展示，有几列内容-->
             <el-col
               v-for="(item2,index2) in formData[item.fields]"
-              v-if="formData[item.fields]"
               :key="index2"
               :span="getSpans(formData[item.fields].length)"
             >
