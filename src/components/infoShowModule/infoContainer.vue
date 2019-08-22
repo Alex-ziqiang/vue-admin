@@ -27,36 +27,29 @@
             </div>
             <i :class="['iconfont', {'iconshouqi': isunfold(item.fields)}, {'iconzhankai': !isunfold(item.fields)}]" />
           </template>
-          <el-form
-            class="ellipsis-form"
-            label-position="left"
-          >
-            <!--v-for 每种展示，有几列内容-->
-            <el-col
-              v-for="(item2,index2) in formData[item.fields]"
-              v-if="formData[item.fields]"
-              :key="index2"
-              :span="getSpans(formData[item.fields].length)"
-            >
-              <!--content-->
-              <FormItem :data="item2" />
-            </el-col>
-          </el-form>
+          <FormDom
+            :form="form"
+            :form-items="formData[item.fields]"
+          />
         </el-collapse-item>
       </el-col>
     </el-row>
   </el-collapse>
 </template>
 <script>
-import FormItem from './infoShowFormItem'
+import FormDom from '@/components/Form/index'
 export default {
-  components: { FormItem },
+  components: { FormDom },
   props: {
     data: {
       type: Object,
       default: function () {
         return {}
       }
+    },
+    form: {
+      type: Object,
+      required: true
     },
     formData: {
       type: Object,
@@ -117,6 +110,42 @@ export default {
     }
     .el-form-item__label {
       white-space: nowrap;
+    }
+    .el-row {
+      margin-top: 8px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    .el-collapse-item__header {
+      position: relative;
+      background: #F9FAFB;
+      padding: 0 24px;
+      border-top: 1px solid #E5E6E9;
+      .iconshouqi,.iconzhankai {
+        position: absolute;
+        right: 24px;
+      }
+      .el-collapse-item__arrow {
+        display: none;
+      }
+    }
+    .el-form-item {
+      white-space: nowrap;
+    }
+    .el-form-item__content {
+      display: flex;
+      span {
+        flex:1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .info-dialog  {
+     .el-dialog__body {
+      padding-bottom: 16px;
     }
   }
 

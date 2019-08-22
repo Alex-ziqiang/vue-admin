@@ -1,5 +1,6 @@
 <template>
   <Dialog
+    class="info-dialog"
     :outer-visible="outerVisible"
     :outer-width="'80vw'"
     title="信息展示"
@@ -9,6 +10,7 @@
       :active-name-arr="activeNames"
       :data="infoLayouts"
       :form-data="formData"
+      :form="form"
     />
   </Dialog>
 </template>
@@ -24,11 +26,9 @@ export default {
       type: Boolean,
       required: true
     },
-    infoData: {
+    form: {
       type: Object,
-      default: function () {
-        return {}
-      }
+      required: true
     }
   },
   data () {
@@ -39,10 +39,8 @@ export default {
     }
   },
   watch: {
-    infoData: {
+    form: {
       handler: function (val) {
-        console.log('val********************')
-        console.log(val)
         this.showInfoList()
       },
       deep: true
@@ -114,302 +112,1094 @@ export default {
             items: 2
           }]
         }
-
         this.formData = {
           'tboxData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }
+          ],
+          'ihuData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }
+          ],
+          'GWData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }
+          ],
+          'VCUData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'ICData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'PFCUData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'MCUData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'GCUData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'BMSData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'DCDCData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'SDCACData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }],
+          'BDCACData': [
+            {
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
+            }, {
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
+            }, {
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
+            }]
+        }
+
+        /* this.formData = {
+          'tboxData': [
             [{
-              label: 'SN：',
-              value: 'this.tbox.sn'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.tbox.hardwareVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.tbox.vender'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.tbox.termFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.tbox.imei'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.tbox.softwareVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.tbox.termProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]
           ],
           'ihuData': [
             [{
-              label: 'SN：',
-              value: 'this.ihu.sn'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.ihu.hardwareVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.ihu.vender'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.ihu.huFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }], [{
-              label: '零件号：',
-              value: 'this.ihu.imei'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.ihu.softwareVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.ihu.huProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]
           ],
           'GWData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.gwNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.gwHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.gwSupplierName'
-            },
-            {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.gwFactoryDate)'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.gwCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.gwSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.gwProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]
           ],
           'VCUData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.vcuNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.vcuHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.vcuSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.vcuFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.vcuCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.vcuSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.vcuProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'ICData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.icNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.icHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.icSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.icFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.icCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.icSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.icProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'PFCUData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.pfcuNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.pfcuHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.pfcuSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.pfcuFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.pfcuCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.pfcuSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.pfcuProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'MCUData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.mcuNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.mcuHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.mcuSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.mcuFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.mcuCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.mcuSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.mcuProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'GCUData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.gcuNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.gcuHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.gcuSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.gcuFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.gcuCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.gcuSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.gcuProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'BMSData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.bmsNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.bmsHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.bmsSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.bmsFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.bmsCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.bmsSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.bmsProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'DCDCData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.dcdcNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.dcdcHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.dcdcSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.dcdcFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.dcdcCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.dcdcSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.dcdcProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'SDCACData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.sdcacNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.sdcacHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.sdcacSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.sdcacFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.sdcacCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.sdcacSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.sdcacProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]],
           'BDCACData': [
             [{
-              label: '终端编号：',
-              value: 'this.vehiclePartsBean.bdcacNumber'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '硬件版本号：',
-              value: 'this.vehiclePartsBean.bdcacHardVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '供应商名称：',
-              value: 'this.vehiclePartsBean.bdcacSupplierName'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
             }, {
-              label: '出厂日期：',
-              value: 'formatDay(this.vehiclePartsBean.bdcacFactoryDate)'
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }],
             [{
-              label: '零件号：',
-              value: 'this.vehiclePartsBean.bdcacCode'
+              type: 'detail',
+              label: '企业地址：',
+              value: 'address'
             }, {
-              label: '软件版本号：',
-              value: 'this.vehiclePartsBean.bdcacSoftVersion'
+              type: 'detail',
+              label: '电子邮箱：',
+              value: 'contactEmail'
             }, {
-              label: '生产批次：',
-              value: 'this.vehiclePartsBean.bdcacProduceBatch'
+              type: 'detail',
+              label: '联系电话：',
+              value: 'contactNumber'
+            }, {
+              type: 'detail',
+              label: '行驶次数：',
+              value: 'driverCount'
+            }, {
+              type: 'detail',
+              label: '企业法人：',
+              value: 'legalRepresentative'
+            }, {
+              type: 'detail',
+              label: '企业名称：',
+              value: 'name'
+            }, {
+              type: 'detail',
+              label: 'orgUUID：',
+              value: 'orgUUID'
             }]]
-        }
+        } */
       })
     }
   }
 }
 </script>
+<style rel="stylesheet/scss" lang="scss">
+  .info-dialog  {
+    .el-dialog__body {
+      padding-bottom: 16px;
+    }
+  }
+
+</style>

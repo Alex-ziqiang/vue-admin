@@ -35,7 +35,7 @@
       />
       <OrgInfoShow
         :outer-visible.sync="infoVisible"
-        :info-data="infoData"
+        :form="infoData"
       />
     </el-card>
   </div>
