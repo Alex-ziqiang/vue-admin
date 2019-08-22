@@ -103,9 +103,7 @@ export default {
     },
     tabList: {
       type: Array,
-      default () {
-        return []
-      }
+      default: () => []
     },
     selectedTab: {
       type: String,

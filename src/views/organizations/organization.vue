@@ -33,10 +33,6 @@
         :form="addEditForm"
         @refresh="refresh"
       />
-      <OrgInfoShow
-        :outer-visible.sync="infoVisible"
-        :info-data="infoData"
-      />
     </el-card>
   </div>
 </template>
@@ -47,11 +43,10 @@ import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
 import OrgDetail from './components/OrgDetail'
-import OrgInfoShow from './components/OrgInfoShow'
 import OrgAddEdit from './components/OrgAddEdit'
 export default {
   name: 'Organization',
-  components: { Form, Table, OrgDetail, OrgAddEdit, OrgInfoShow },
+  components: { Form, Table, OrgDetail, OrgAddEdit },
   data () {
     return {
       form: {},
@@ -102,7 +97,6 @@ export default {
         {
           label: '操作',
           buttons: [
-            { type: 'text', label: '信息', click: this.handleDetailShow },
             { type: 'text', label: '编辑', click: this.handleEdit },
             { type: 'text', label: '删除', click: this.handleDelete }
           ]
