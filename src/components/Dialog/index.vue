@@ -4,6 +4,7 @@
     :visible="outerVisible"
     :width="outerWidth"
     :close-on-click-modal="type === 'normal'"
+    :destroy-on-close="true"
     @open="outerOpen"
     @close="outerClose"
   >
@@ -103,9 +104,7 @@ export default {
     },
     tabList: {
       type: Array,
-      default () {
-        return []
-      }
+      default: () => []
     },
     selectedTab: {
       type: String,

@@ -33,25 +33,20 @@
         :form="addEditForm"
         @refresh="refresh"
       />
-      <OrgInfoShow
-        :outer-visible.sync="infoVisible"
-        :form="infoData"
-      />
     </el-card>
   </div>
 </template>
 
 <script>
-import formatContext from '@/utils/formatTable.js'
+import formatter from '@/utils/formatTable.js'
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
 import OrgDetail from './components/OrgDetail'
-import OrgInfoShow from './components/OrgInfoShow'
 import OrgAddEdit from './components/OrgAddEdit'
 export default {
   name: 'Organization',
-  components: { Form, Table, OrgDetail, OrgAddEdit, OrgInfoShow },
+  components: { Form, Table, OrgDetail, OrgAddEdit },
   data () {
     return {
       form: {},
@@ -98,11 +93,10 @@ export default {
         },
         { label: '企业法人', prop: 'legalRepresentative' },
         { label: '企业联系人', prop: 'organizationContact' },
-        { label: '联系电话', prop: 'contactNumber', formatter: formatContext },
+        { label: '联系电话', prop: 'contactNumber', formatter },
         {
           label: '操作',
           buttons: [
-            { type: 'text', label: '信息', click: this.handleDetailShow },
             { type: 'text', label: '编辑', click: this.handleEdit },
             { type: 'text', label: '删除', click: this.handleDelete }
           ]
