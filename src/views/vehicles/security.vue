@@ -2,6 +2,7 @@
   <div class="page-wrapper">
     <Tab
       v-model="activeName"
+      type="border-card"
       :tabs="tabs"
     />
   </div>

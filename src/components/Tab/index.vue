@@ -1,7 +1,8 @@
 <template>
   <el-tabs
     :value="value"
-    type="border-card"
+    :type="type"
+    v-bind="$attrs"
     v-on="$listeners"
   >
     <el-tab-pane
@@ -23,6 +24,10 @@ export default {
   name: 'Tab',
   props: {
     value: {
+      type: String,
+      required: true
+    },
+    type: {
       type: String,
       required: true
     },
