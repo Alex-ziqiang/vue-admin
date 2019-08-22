@@ -96,6 +96,12 @@
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
               />
+              <!-- 级联选择框 -->
+              <el-cascader
+                v-if="item.type === 'cascader'"
+                v-model="form[item.value]"
+                v-bind="item"
+              />
             </el-form-item>
             <!-- 按钮 -->
           </el-col>
