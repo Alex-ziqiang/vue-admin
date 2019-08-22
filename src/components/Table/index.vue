@@ -26,7 +26,7 @@
                 v-bind="button"
                 @click="button.click(row)"
               >
-                {{ button.label || row[button.prop] }}
+                {{ button.label || getRowIdentity(row, button.prop) }}
               </el-button>
             </template>
           </el-table-column>
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { getRowIdentity } from 'element-ui/packages/table/src/util'
 export default {
   name: 'Table',
   props: {
@@ -79,6 +80,7 @@ export default {
     }
   },
   methods: {
+    getRowIdentity,
     currentChange (val) {
       this.$emit('current-change', val)
     },
