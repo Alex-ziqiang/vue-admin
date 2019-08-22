@@ -29,18 +29,12 @@
 
 <script>
 import formatter from '@/utils/formatTable.js'
-import { getXcalls } from '@/api/vehicle'
+import { getThefts } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
 export default {
-  name: 'XCall',
+  name: 'TheftAlert',
   components: { Form, Table },
-  props: {
-    name: {
-      type: String,
-      required: true
-    }
-  },
   data () {
     return {
       form: {},
@@ -68,7 +62,7 @@ export default {
         },
         {
           type: 'datetimerange',
-          label: '发生时间',
+          label: '告警时间',
           value: 'occurTime',
           clearable: true,
           span: 12
@@ -82,15 +76,15 @@ export default {
       totalCount: '',
       data: [],
       columns: [
-        { label: '时间', prop: 'collectTime', formatter },
+        { label: '告警产生时间', prop: 'collectTime', formatter },
         { label: 'VIN', prop: 'vin' },
         { label: '车牌', prop: 'plate' },
         { label: '驾驶员账号', prop: 'userName' },
         { label: '所属运营企业', prop: 'orgName' },
         {
-          label: '地点',
+          label: '告警地点',
           buttons: [
-            { type: 'text', prop: 'gps.latitude', click: this.handleAddress }
+            { type: 'text', prop: 'theftLocation.latitude', click: this.handleAddress }
           ]
         }
       ],
@@ -102,29 +96,29 @@ export default {
     }
   },
   created () {
-    this.handleXcalls()
+    this.handleThefts()
   },
   methods: {
     handleCurrentChange (val) {
       this.pagination.currentPage = val
-      this.handleXcalls()
+      this.handleThefts()
     },
     handleSizeChange (val) {
       this.pagination.currentPage = 1
       this.pagination.pageSize = val
-      this.handleXcalls()
+      this.handleThefts()
     },
     handleAddress () {
       console.log('click')
     },
-    // 获取运营企业
-    handleXcalls () {
+    // 获取车辆被盗告警通知
+    handleThefts () {
       this.tableLoading = true
-      const params = { callType: this.name, ...this.form, ...this.pagination }
-      getXcalls(params)
+      const params = { ...this.form, ...this.pagination }
+      getThefts(params)
         .then(res => {
           this.tableLoading = false
-          this.data = res.vehicleXCallList
+          this.data = res.vehicleTheftBeans
           this.pagination.total = res.totalCount
         })
         .catch(() => {
@@ -134,7 +128,7 @@ export default {
     // 搜索
     searchSubmit () {
       this.pagination.currentPage = 1
-      this.handleXcalls()
+      this.handleThefts()
     },
     reset () {
       this.form = {}

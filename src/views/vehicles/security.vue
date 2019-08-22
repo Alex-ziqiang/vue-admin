@@ -14,8 +14,13 @@ export default {
   components: { Tab },
   data () {
     return {
-      activeName: 'ECALL',
+      activeName: 'TheftAlert',
       tabs: [
+        {
+          label: '被盗入侵',
+          name: 'TheftAlert',
+          component: () => import('./components/TheftAlert')
+        },
         {
           label: 'E-Call记录',
           name: 'ECALL',
