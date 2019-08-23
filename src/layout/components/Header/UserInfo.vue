@@ -29,9 +29,9 @@ export default {
   data () {
     return {
       formItems: [
-        { type: 'detail', label: '账号', value: 'userName' },
-        { type: 'detail', label: '角色', value: 'roleType', formatFiled },
-        { type: 'detail', label: '手机号码', value: 'mobile' }
+        { label: '账号', value: 'userName' },
+        { label: '角色', value: 'roleType', formatFiled },
+        { label: '手机号码', value: 'mobile' }
       ]
     }
   },

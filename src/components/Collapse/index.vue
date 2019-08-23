@@ -16,6 +16,8 @@
           <Form
             :form="form"
             :form-items="item.formItems"
+            :is-collapse="true"
+            label-width="auto"
           />
           <slot />
         </el-collapse-item>

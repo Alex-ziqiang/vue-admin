@@ -39,12 +39,20 @@ export const constantRoutes = [
   {
     path: '/vehicle',
     component: Layout,
-    redirect: '/vehicle/security',
+    redirect: '/vehicle/configuration',
     meta: {
       title: '车辆管理',
       icon: 'iconfont icon-vehicles'
     },
     children: [
+      {
+        path: '/vehicle/configuration',
+        name: 'configuration',
+        component: () => import('@/views/vehicles/configuration'),
+        meta: {
+          title: '配置信息'
+        }
+      },
       {
         path: '/vehicle/security',
         name: 'security',
