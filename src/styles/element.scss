@@ -76,3 +76,12 @@
     border-radius: 0 0 4px 4px;
   }
 }
+.el-collapse-item {
+  .el-collapse-item__header {
+    background: #F9FAFB;
+    padding: 0 24px;
+  }
+  .el-collapse-item__header.is-active {
+    border-bottom: 1px solid#e5e6e9;
+  }
+}
