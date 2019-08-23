@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import formatter from '@/utils/formatTable.js'
 import { getVehicles } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
@@ -113,7 +114,7 @@ export default {
         { label: 'IHU SN', prop: 'ihu.sn' },
         { label: 'ICCID', prop: 'tbox.simcard.iccid' },
         { label: '车型', prop: 'model.name' },
-        { label: '车辆状态', prop: 'vehicleLifeStatus' },
+        { label: '车辆状态', prop: 'vehicleLifeStatus', formatter },
         { label: '所属运营企业', prop: 'organizationBean.name' }
       ],
       pagination: {

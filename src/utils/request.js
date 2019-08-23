@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import { guid, rebuildObj, legitimacy, isFormData } from '@/utils'
+import { isFormData } from '@/utils/types'
+import { guid, rebuildObj, legitimacy } from '@/utils'
 import { getItem } from '@/utils/auth'
 import { getSign, postSign } from '@/utils/sign'
 import store from '@/store'

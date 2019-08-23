@@ -36,7 +36,7 @@ export default {
     return {
       loading: false,
       form: {},
-      activeNames: ['basicData', 'partData'],
+      activeNames: ['basicData', 'partData', 'dealerData', 'organizationData'],
       collapseItems: [
         {
           label: '车辆基础信息',
