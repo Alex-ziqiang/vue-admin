@@ -21,6 +21,7 @@
 <script>
 export default {
   name: 'Tab',
+  inheritAttrs: false,
   props: {
     value: {
       type: String,

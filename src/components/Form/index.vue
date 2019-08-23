@@ -119,6 +119,7 @@
 <script>
 export default {
   name: 'Form',
+  inheritAttrs: false,
   props: {
     form: {
       type: Object,

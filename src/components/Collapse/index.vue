@@ -1,7 +1,6 @@
 <template>
   <el-collapse
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <el-row :gutter="20">
       <el-col
@@ -30,6 +29,7 @@ import Form from '@/components/Form'
 export default {
   name: 'Collapse',
   components: { Form },
+  inheritAttrs: false,
   props: {
     collapseItems: {
       type: Array,

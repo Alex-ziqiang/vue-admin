@@ -4,7 +4,7 @@
     :visible="outerVisible"
     :width="outerWidth"
     :close-on-click-modal="type === 'normal'"
-    :destroy-on-close="true"
+    destroy-on-close
     @open="outerOpen"
     @close="outerClose"
   >
@@ -73,6 +73,7 @@
 <script>
 export default {
   name: 'Dialog',
+  inheritAttrs: false,
   props: {
     outerVisible: {
       type: Boolean,

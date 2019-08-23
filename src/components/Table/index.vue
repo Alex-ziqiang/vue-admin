@@ -50,6 +50,7 @@
 import { getRowIdentity } from 'element-ui/packages/table/src/util'
 export default {
   name: 'Table',
+  inheritAttrs: false,
   props: {
     loading: {
       type: Boolean,
