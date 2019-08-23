@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import formatFiled from '@/utils/formatFiled'
 import { getVehicle } from '@/api/vehicle'
 import Dialog from '@/components/Dialog'
 import Collapse from '@/components/Collapse'
@@ -43,9 +44,9 @@ export default {
           name: 'basicData',
           formItems: [
             { label: 'VIN：', value: 'vin' },
-            { label: '车辆类型：', value: 'vehType' },
+            { label: '车辆类型：', value: 'vehType', formatFiled },
             { label: '车辆型号：', value: 'model.name' },
-            { label: '二类底盘：', value: 'classTwoBaseplate' },
+            { label: '二类底盘：', value: 'classTwoBaseplate', formatFiled },
             { label: '生产批次：', value: 'produceBatch' },
             { label: '生产日期：', value: 'produceDate' },
             { label: '车辆名称：', value: 'vehName' },
