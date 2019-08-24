@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-wrapper">
     <el-card>
       <div
         slot="header"

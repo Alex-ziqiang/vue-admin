@@ -12,7 +12,7 @@
       <el-col
         v-for="item in formItems"
         :key="item.label"
-        :md="inline ? item.span || 6 : isCollapse ? item.span || 12 : 24"
+        :md="inline ? item.span || 8 : isCollapse ? item.span || 12 : 24"
         :xs="24"
       >
         <el-form-item
