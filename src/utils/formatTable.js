@@ -1,7 +1,7 @@
-import dayjs from 'dayjs'
+import { formatDate } from 'element-ui/src/utils/date-util'
 const strategyMap = {
   collectTime: val => {
-    return dayjs(val).format('YYYY-MM-DD HH:mm:ss')
+    return formatDate(val, 'yyyy-MM-dd HH:mm:ss')
   },
   contactNumber: val => {
     return val ? '+86' + val : ''
