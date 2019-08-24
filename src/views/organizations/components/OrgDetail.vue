@@ -2,7 +2,7 @@
   <Dialog
     :outer-visible="outerVisible"
     title="企业详情"
-    outer-width="50vw"
+    width="50vw"
     v-on="$listeners"
   >
     <Collapse

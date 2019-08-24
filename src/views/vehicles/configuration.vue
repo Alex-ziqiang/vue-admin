@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import formatter from '@/utils/formatTable.js'
+import formatter from '@/utils/formatTable'
 import { getVehicles } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'

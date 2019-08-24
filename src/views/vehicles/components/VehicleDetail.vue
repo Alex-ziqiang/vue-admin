@@ -2,7 +2,8 @@
   <Dialog
     :outer-visible="outerVisible"
     title="车辆详情"
-    outer-width="80vw"
+    width="80vw"
+    top="10vh"
     v-on="$listeners"
     @outerOpen="outerOpen"
   >
@@ -48,13 +49,13 @@ export default {
             { label: '车辆型号：', value: 'model.name' },
             { label: '二类底盘：', value: 'classTwoBaseplate', formatFiled },
             { label: '生产批次：', value: 'produceBatch' },
-            { label: '生产日期：', value: 'produceDate' },
+            { label: '生产日期：', value: 'produceDate', formatFiled },
             { label: '车辆名称：', value: 'vehName' },
             { label: '车辆品牌：', value: 'model.brandName' },
             { label: '车辆颜色：', value: 'color' },
             { label: '生产企业：', value: 'model.manufactoryName' },
             { label: '车辆合格证编号：', value: 'vehCertificateNumber' },
-            { label: '出厂日期：', value: 'factoryDate' }
+            { label: '出厂日期：', value: 'factoryDate', formatFiled }
           ]
         },
         {

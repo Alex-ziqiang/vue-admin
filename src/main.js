@@ -8,7 +8,7 @@ import router from './router'
 import store from './store'
 import './icons' // icon
 import './permission' // permission control
-import './plugins/element.js'
+import './plugins/element'
 
 Vue.config.productionTip = false
 

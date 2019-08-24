@@ -1,3 +1,4 @@
+import { formatDate } from 'element-ui/src/utils/date-util'
 const filedMap = {
   roleType: {
     'SUPER': '超级管理员'
@@ -11,11 +12,22 @@ const filedMap = {
   classTwoBaseplate: {
     'true': '是',
     'false': '否'
+  },
+  produceDate: val => {
+    return formatDate(val, 'yyyy-MM-dd')
+  },
+  factoryDate: val => {
+    return formatDate(val, 'yyyy-MM-dd')
   }
 }
 
 const formatFiled = (key, value) => {
-  return filedMap[key] ? filedMap[key][value] || value : value
+  if (!filedMap[key]) return
+  if (typeof filedMap[key] === 'function') {
+    return filedMap[key](value)
+  } else {
+    return filedMap[key][value] || value
+  }
 }
 
 export default formatFiled
