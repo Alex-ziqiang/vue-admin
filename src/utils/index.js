@@ -43,9 +43,7 @@ export const trim = (obj = {}) => {
  * @param {object} obj
  * @return boolean
  */
-export const isEmptyObj = (obj = {}) => {
-  return (Object.keys(obj).length === 0 && obj.constructor === Object)
-}
+export const isEmptyObj = (obj) => (JSON.stringify(obj) === '{}')
 
 export const exportUrl = (url, formData = {}, extra = {}) => {
   if (!url && url.indexOf('/') !== -1) throw new Error('please give me a right export API')
@@ -83,45 +81,6 @@ export const legitimacy = (obj = {}) => {
   return true
 }
 
-/**
- * format 时间格式化
- * @param {number} date
- * @param {string} format
- * @return string
- */
-export const format = (date, format = 'yyyy-MM-dd hh:mm:ss') => {
-  let map = {}
-
-  if (!date) return ''
-
-  date = new Date(+date)
-  map = {
-    'M': date.getMonth() + 1,
-    'd': date.getDate(),
-    'h': date.getHours(),
-    'm': date.getMinutes(),
-    's': date.getSeconds(),
-    'q': Math.floor((date.getMonth() + 3) / 3),
-    'S': date.getMilliseconds()
-  }
-  format = format.replace(/([yMdhmsqS])+/g, (all, t) => {
-    let v = map[t]
-
-    if (v !== undefined) {
-      if (all.length > 1) {
-        v = '0' + v
-        v = v.substr(v.length - 2)
-      }
-
-      return v
-    } else if (t === 'y') {
-      return (date.getFullYear() + '').substr(4 - all.length)
-    }
-
-    return all
-  })
-  return format
-}
 /**
  * omit 对象去掉属性
  * @param {object} obj
@@ -171,11 +130,33 @@ export const formatNumber = (val, ratio = 1, n = 2) => {
   return ((val - 0) / ratio).toFixed(n)
 }
 
-/**
- * isFormData 判断是否为FormData
- * @param {object} v
- * @return boolean
- */
-export const isFormData = (v) => {
-  return Object.prototype.toString.call(v) === '[object FormData]'
+export const isEmpty = function (val) {
+  // null or undefined
+  if (val == null) return true
+
+  if (typeof val === 'boolean') return false
+
+  if (typeof val === 'number') return !val
+
+  if (val instanceof Error) return val.message === ''
+
+  switch (Object.prototype.toString.call(val)) {
+    // String or Array
+    case '[object String]':
+    case '[object Array]':
+      return !val.length
+
+    // Map or Set or File
+    case '[object File]':
+    case '[object Map]':
+    case '[object Set]': {
+      return !val.size
+    }
+    // Plain Object
+    case '[object Object]': {
+      return !Object.keys(val).length
+    }
+  }
+
+  return false
 }

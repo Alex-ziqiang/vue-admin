@@ -38,7 +38,7 @@
 }
 .page-wrapper {
   .el-card {
-    margin: 10px 0;
+    margin-bottom: 10px;
     .el-card__header {
       background: #f4f8fa;
       padding: 12px 20px;
@@ -74,5 +74,14 @@
     padding: 10px 16px;
     border-top: 1px solid #e8e8e8;
     border-radius: 0 0 4px 4px;
+  }
+}
+.el-collapse-item {
+  .el-collapse-item__header {
+    background: #F9FAFB;
+    padding: 0 24px;
+  }
+  .el-collapse-item__header.is-active {
+    border-bottom: 1px solid#e5e6e9;
   }
 }

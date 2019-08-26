@@ -23,22 +23,22 @@
         @current-change="handleCurrentChange"
         @size-change="handleSizeChange"
       />
-      <OrgDetail
-        :outer-visible.sync="detailVisible"
-        :form="detailForm"
-      />
-      <OrgAddEdit
-        :type="type"
-        :outer-visible.sync="addEditVisible"
-        :form="addEditForm"
-        @refresh="refresh"
-      />
     </el-card>
+    <OrgDetail
+      :outer-visible.sync="detailVisible"
+      :form="detailForm"
+    />
+    <OrgAddEdit
+      :type="type"
+      :outer-visible.sync="addEditVisible"
+      :form="addEditForm"
+      @refresh="refresh"
+    />
   </div>
 </template>
 
 <script>
-import formatContext from '@/utils/formatTable.js'
+import formatter from '@/utils/formatTable'
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
@@ -93,7 +93,7 @@ export default {
         },
         { label: '企业法人', prop: 'legalRepresentative' },
         { label: '企业联系人', prop: 'organizationContact' },
-        { label: '联系电话', prop: 'contactNumber', formatter: formatContext },
+        { label: '联系电话', prop: 'contactNumber', formatter },
         {
           label: '操作',
           buttons: [
@@ -118,7 +118,6 @@ export default {
     this.handleOrganizations()
   },
   methods: {
-    formatContext,
     refresh () {
       this.addEditVisible = false
       this.handleOrganizations()
