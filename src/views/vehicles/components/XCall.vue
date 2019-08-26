@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import formatter from '@/utils/formatTable'
+import { formatter } from '@/utils/formatFiled'
 import { getXcalls } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'

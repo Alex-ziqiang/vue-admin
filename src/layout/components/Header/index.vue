@@ -8,6 +8,7 @@
         id="screenfull"
         class="right-item hover-effect"
       />
+      <Notification class="right-item notification hover-effect" />
       <el-dropdown
         class="right-item hover-effect"
         @command="handleCommand"
@@ -48,9 +49,10 @@
 import UserInfo from './UserInfo'
 import ModifyPassword from './ModifyPassword'
 import Screenfull from '@/components/Screenfull'
+import Notification from '@/components/Notification'
 export default {
   name: 'Header',
-  components: { UserInfo, ModifyPassword, Screenfull },
+  components: { UserInfo, ModifyPassword, Screenfull, Notification },
   data () {
     return {
       userInfoOuterVisible: false,
@@ -113,6 +115,9 @@ export default {
       &.hover-effect {
         cursor: pointer;
       }
+    }
+    .notification {
+      font-size: 28px;
     }
     .avatar-wrapper {
       height: 100%;

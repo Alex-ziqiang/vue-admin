@@ -16,7 +16,7 @@
 import { mapGetters } from 'vuex'
 import Form from '@/components/Form'
 import Dialog from '@/components/Dialog'
-import formatFiled from '@/utils/formatFiled'
+import { formatFiled } from '@/utils/formatFiled'
 export default {
   name: 'UserInfo',
   components: { Form, Dialog },

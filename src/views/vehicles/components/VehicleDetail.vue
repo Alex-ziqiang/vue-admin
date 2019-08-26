@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import formatFiled from '@/utils/formatFiled'
+import { formatFiled } from '@/utils/formatFiled'
 import { getVehicle } from '@/api/vehicle'
 import Dialog from '@/components/Dialog'
 import Collapse from '@/components/Collapse'
