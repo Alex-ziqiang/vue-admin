@@ -9,7 +9,7 @@
     @cancel="cancel"
   >
     <Form
-      :ref-obj.sync="ref"
+      ref="form"
       :form="form"
       :form-items="formItems"
       :rules="rules"
@@ -55,7 +55,6 @@ export default {
       }
     }
     return {
-      ref: null,
       form: {},
       formItems: [
         { type: 'slot', label: '账号', value: 'userName' },
@@ -85,7 +84,7 @@ export default {
   },
   methods: {
     editSubmit () {
-      this.ref.validate(valid => {
+      this.$refs.form.validate(valid => {
         if (!valid) {
           return
         }
@@ -93,7 +92,7 @@ export default {
       })
     },
     cancel () {
-      this.ref.resetFields()
+      this.$refs.form.resetFields()
     }
   }
 }

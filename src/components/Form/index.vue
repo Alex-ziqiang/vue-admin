@@ -156,22 +156,7 @@ export default {
     valueFormat: {
       type: String,
       default: 'timestamp'
-    },
-    refObj: {
-      type: Object,
-      default: null
     }
-  },
-  watch: {
-    form: {
-      handler () {
-        this.$emit('update:refObj', this.$refs['form'])
-      },
-      deep: true
-    }
-  },
-  mounted () {
-    this.$emit('update:refObj', this.$refs['form'])
   },
   methods: {
     getValueByPath,
@@ -185,6 +170,15 @@ export default {
         placeholder = row.label
       }
       return placeholder
+    },
+    validate (valid) {
+      return this.$refs.form.validate(valid)
+    },
+    resetFields () {
+      return this.$refs.form.resetFields()
+    },
+    clearValidate () {
+      return this.$refs.form.clearValidate()
     }
   }
 }
