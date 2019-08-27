@@ -49,22 +49,19 @@ export default {
           type: 'input',
           label: 'VIN',
           value: 'vin',
-          clearable: true,
-          span: 8
+          clearable: true
         },
         {
           type: 'input',
           label: '驾驶员账号',
           value: 'userName',
-          clearable: true,
-          span: 8
+          clearable: true
         },
         {
           type: 'input',
           label: '所属运营企业',
           value: 'orgUUID',
-          clearable: true,
-          span: 8
+          clearable: true
         },
         {
           type: 'datetimerange',
