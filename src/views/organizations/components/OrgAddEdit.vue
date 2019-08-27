@@ -9,7 +9,7 @@
     @outerOpen="outerOpen"
   >
     <Form
-      :ref-obj.sync="ref"
+      ref="form"
       :form="currentForm"
       :form-items="formItems"
       :rules="rules"
@@ -41,7 +41,6 @@ export default {
   data () {
     return {
       uuid: '',
-      ref: null,
       currentForm: {},
       formItems: [
         { type: 'input', label: '企业名称', value: 'name', clearable: true },
@@ -105,7 +104,7 @@ export default {
       this.$emit('refresh')
     },
     submit () {
-      this.ref.validate(valid => {
+      this.$refs.form.validate(valid => {
         if (!valid) {
           return
         }
@@ -131,7 +130,7 @@ export default {
       })
     },
     cancel () {
-      this.ref.clearValidate()
+      this.$refs.form.clearValidate()
     }
   }
 }

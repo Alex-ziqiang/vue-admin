@@ -1,7 +1,6 @@
 <template>
   <el-collapse
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <el-row :gutter="20">
       <el-col
@@ -17,6 +16,8 @@
           <Form
             :form="form"
             :form-items="item.formItems"
+            :is-collapse="true"
+            label-width="auto"
           />
           <slot />
         </el-collapse-item>
@@ -30,6 +31,7 @@ import Form from '@/components/Form'
 export default {
   name: 'Collapse',
   components: { Form },
+  inheritAttrs: false,
   props: {
     collapseItems: {
       type: Array,

@@ -1,9 +1,9 @@
 <template>
   <div class="login-wrap">
     <Form
+      ref="loginForm"
       class="login-form"
       label-position="top"
-      :ref-obj.sync="ref"
       :form="loginForm"
       :form-items="loginFormItems"
       :rules="loginRules"
@@ -44,7 +44,6 @@ export default {
   data () {
     return {
       authCodeSrc: '',
-      ref: null,
       loginForm: {},
       loginFormItems: [
         {
@@ -104,7 +103,7 @@ export default {
       this.authCodeSrc = `${authCodeApi}?uuid=${this.time}`
     },
     submitForm () {
-      this.ref.validate(valid => {
+      this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           const data = { ...this.loginForm, authCodeUUID: this.time }

@@ -5,17 +5,18 @@
     :model="form"
     :rules="rules"
     :inline="inline"
+    :is-collapse="isCollapse"
     :label-width="labelWidth"
   >
     <el-row :gutter="20">
       <el-col
         v-for="item in formItems"
         :key="item.label"
-        :md="inline ? item.span || 6 : 24"
+        :md="inline ? item.span || 8 : isCollapse ? item.span || 12 : 24"
         :xs="24"
       >
         <el-form-item
-          :prop="item.value"
+          :prop="item.type ? item.value : ''"
           :label="item.label"
           :class="item.className"
         >
@@ -25,8 +26,8 @@
             <slot :name="item.value" />
           </template>
           <!-- 详情项 -->
-          <span v-if="item.type === 'detail'">
-            {{ item.formatFiled ? item.formatFiled(item.value, form[item.value]) : form[item.value] }}
+          <span v-if="!item.type">
+            {{ item.formatFiled ? item.formatFiled(item.value, getValueByPath(form, item.value)) : getValueByPath(form, item.value) }}
           </span>
           <!-- 普通输入框 -->
           <el-input
@@ -117,8 +118,10 @@
 </template>
 
 <script>
+import { getValueByPath } from 'element-ui/src/utils/util'
 export default {
   name: 'Form',
+  inheritAttrs: false,
   props: {
     form: {
       type: Object,
@@ -129,6 +132,10 @@ export default {
       default: null
     },
     inline: {
+      type: Boolean,
+      default: false
+    },
+    isCollapse: {
       type: Boolean,
       default: false
     },
@@ -149,24 +156,10 @@ export default {
     valueFormat: {
       type: String,
       default: 'timestamp'
-    },
-    refObj: {
-      type: Object,
-      default: null
     }
-  },
-  watch: {
-    form: {
-      handler () {
-        this.$emit('update:refObj', this.$refs['form'])
-      },
-      deep: true
-    }
-  },
-  mounted () {
-    this.$emit('update:refObj', this.$refs['form'])
   },
   methods: {
+    getValueByPath,
     getPlaceholder (row) {
       let placeholder
       if (row.type === 'input' || row.type === 'textarea' || row.type === 'inputNumber') {
@@ -177,6 +170,15 @@ export default {
         placeholder = row.label
       }
       return placeholder
+    },
+    validate (valid) {
+      return this.$refs.form.validate(valid)
+    },
+    resetFields () {
+      return this.$refs.form.resetFields()
+    },
+    clearValidate () {
+      return this.$refs.form.clearValidate()
     }
   }
 }

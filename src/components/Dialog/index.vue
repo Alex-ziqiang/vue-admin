@@ -2,9 +2,10 @@
   <el-dialog
     v-bind="$attrs"
     :visible="outerVisible"
-    :width="outerWidth"
+    :width="width"
+    :top="top"
     :close-on-click-modal="type === 'normal'"
-    :destroy-on-close="true"
+    destroy-on-close
     @open="outerOpen"
     @close="outerClose"
   >
@@ -73,14 +74,19 @@
 <script>
 export default {
   name: 'Dialog',
+  inheritAttrs: false,
   props: {
     outerVisible: {
       type: Boolean,
       required: true
     },
-    outerWidth: {
+    width: {
       type: String,
       default: '30vw'
+    },
+    top: {
+      type: String,
+      default: '15vh'
     },
     innerVisible: {
       type: Boolean,

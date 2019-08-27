@@ -23,22 +23,22 @@
         @current-change="handleCurrentChange"
         @size-change="handleSizeChange"
       />
-      <OrgDetail
-        :outer-visible.sync="detailVisible"
-        :form="detailForm"
-      />
-      <OrgAddEdit
-        :type="type"
-        :outer-visible.sync="addEditVisible"
-        :form="addEditForm"
-        @refresh="refresh"
-      />
     </el-card>
+    <OrgDetail
+      :outer-visible.sync="detailVisible"
+      :form="detailForm"
+    />
+    <OrgAddEdit
+      :type="type"
+      :outer-visible.sync="addEditVisible"
+      :form="addEditForm"
+      @refresh="refresh"
+    />
   </div>
 </template>
 
 <script>
-import formatter from '@/utils/formatTable.js'
+import { formatter } from '@/utils/formatFiled'
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
@@ -111,9 +111,7 @@ export default {
       addEditVisible: false,
       addEditForm: {},
       detailVisible: false,
-      detailForm: {},
-      infoVisible: false,
-      infoData: {}
+      detailForm: {}
     }
   },
   created () {
@@ -145,10 +143,6 @@ export default {
       this.addEditVisible = true
       this.type = 'edit'
       this.addEditForm = row
-    },
-    handleDetailShow (row) {
-      this.infoVisible = true
-      this.infoData = row
     },
     handleDelete (row) {
       this.$confirm('确定删除该企业吗？', {
