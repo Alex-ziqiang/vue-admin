@@ -83,16 +83,17 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "~@/styles/variables.scss";
 .header-wrapper {
-  height: 62px;
+  height: $headerHeight;
   overflow: hidden;
   position: relative;
-  background: #1d2b36;
+  background: $headerBg;
   box-shadow: 0 2px 6px rgba(0, 21, 41, 0.35);
   .left {
     display: inline-block;
     height: 100%;
-    line-height: 62px;
+    line-height: $headerHeight;
     .web-title {
       font-size: 23px;
       margin-left: 66px;
@@ -121,7 +122,7 @@ export default {
     }
     .avatar-wrapper {
       height: 100%;
-      line-height: 62px;
+      line-height: $headerHeight;
       .role-img {
         vertical-align: middle;
       }

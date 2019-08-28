@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { formatter } from '@/utils/formatFiled'
+import { formatter } from '@/utils/format'
 import { getXcalls } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
@@ -49,22 +49,19 @@ export default {
           type: 'input',
           label: 'VIN',
           value: 'vin',
-          clearable: true,
-          span: 8
+          clearable: true
         },
         {
           type: 'input',
           label: '驾驶员账号',
           value: 'userName',
-          clearable: true,
-          span: 8
+          clearable: true
         },
         {
           type: 'input',
           label: '所属运营企业',
           value: 'orgUUID',
-          clearable: true,
-          span: 8
+          clearable: true
         },
         {
           type: 'datetimerange',

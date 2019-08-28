@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { formatter } from '@/utils/formatFiled'
+import { formatter } from '@/utils/format'
 import { getOrganizations, deleteOrganization } from '@/api/organization'
 import Form from '@/components/Form'
 import Table from '@/components/Table'

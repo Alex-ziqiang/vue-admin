@@ -60,13 +60,11 @@ export default {
           clearable: true
         },
         {
-          type: 'slot',
-          label: '验证码',
-          value: 'authCode'
+          slot: 'authCode',
+          label: '验证码'
         },
         {
-          type: 'slot',
-          value: 'submit'
+          slot: 'submit'
         }
       ],
       loginRules: {
