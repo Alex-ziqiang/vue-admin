@@ -160,19 +160,3 @@ export const isEmpty = function (val) {
 
   return false
 }
-
-/**
- * reconstructObject 分解对象为数组，其中包含对象的key\value值
- * @param {object} obj
- * @return Array
- */
-export const reconstructObject = (obj) => {
-  let arr = []
-  for (let key in obj) {
-    arr.push({
-      label: obj[key],
-      value: key
-    })
-  }
-  return arr
-}

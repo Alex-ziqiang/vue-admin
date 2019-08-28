@@ -28,8 +28,7 @@
 </template>
 
 <script>
-import { reconstructObject } from '@/utils/index'
-import { formatter, filedMap } from '@/utils/format'
+import { formatter, filedMap, reconstructObject } from '@/utils/format'
 import { safety } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
