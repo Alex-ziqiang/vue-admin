@@ -28,12 +28,13 @@
 </template>
 
 <script>
-import { formatter } from '@/utils/format'
-import { getXcalls } from '@/api/vehicle'
+import { reconstructObject } from '@/utils/index'
+import { formatter, filedMap } from '@/utils/format'
+import { safety } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
 export default {
-  name: 'XCall',
+  name: 'Safety',
   components: { Form, Table },
   props: {
     name: {
@@ -42,6 +43,8 @@ export default {
     }
   },
   data () {
+    let reasonTypeList = reconstructObject(filedMap.reasonType)
+    reasonTypeList.unshift({ label: '全部', value: '' })
     return {
       form: {},
       formItems: [
@@ -64,6 +67,13 @@ export default {
           clearable: true
         },
         {
+          type: 'select',
+          label: '告警类型',
+          value: 'reasonType',
+          clearable: true,
+          list: reasonTypeList
+        },
+        {
           type: 'datetimerange',
           label: '发生时间',
           value: 'occurTime',
@@ -73,21 +83,23 @@ export default {
       ],
       buttons: [
         { label: '查询', type: 'primary', icon: 'el-icon-search', click: this.searchSubmit },
-        { label: '重置', type: 'info', click: this.reset }
+        { label: '重置', type: 'info', click: this.reset },
+        { label: '导出', type: 'success', click: this.exportData }
       ],
       tableLoading: false,
       totalCount: '',
       data: [],
       columns: [
-        { label: '时间', prop: 'collectTime', formatter },
+        { label: '"告警产生时间', prop: 'collectTime', formatter },
         { label: 'VIN', prop: 'vin' },
-        { label: '车牌', prop: 'plate' },
+        { label: '车牌号', prop: 'plate' },
         { label: '驾驶员账号', prop: 'userName' },
         { label: '所属运营企业', prop: 'orgName' },
+        { label: '告警类型', prop: 'reasonType', formatter },
         {
           label: '地点',
           buttons: [
-            { type: 'text', prop: 'gps.latitude', click: this.handleAddress }
+            { type: 'text', prop: 'theftLocation.address', click: this.handleAddress }
           ]
         }
       ],
@@ -99,30 +111,33 @@ export default {
     }
   },
   created () {
-    this.handleXcalls()
+    this.handleSafetyList()
   },
   methods: {
     handleCurrentChange (val) {
       this.pagination.currentPage = val
-      this.handleXcalls()
+      this.handleSafetyList()
     },
     handleSizeChange (val) {
       this.pagination.currentPage = 1
       this.pagination.pageSize = val
-      this.handleXcalls()
+      this.handleSafetyList()
+    },
+    exportData () {
+      console.log('exportData')
     },
     handleAddress () {
       console.log('click')
     },
     // 获取运营企业
-    handleXcalls () {
+    handleSafetyList () {
       this.tableLoading = true
-      const params = { callType: this.name, ...this.form, ...this.pagination }
-      getXcalls(params)
+      const params = { ...this.form, ...this.pagination }
+      safety(params)
         .then(res => {
           this.tableLoading = false
-          this.data = res.vehicleXCallList
-          this.pagination.total = res.totalCount
+          this.data = res.vehicleSafetyBeans
+          this.pagination.total = res.count
         })
         .catch(() => {
           this.tableLoading = false
@@ -131,7 +146,7 @@ export default {
     // 搜索
     searchSubmit () {
       this.pagination.currentPage = 1
-      this.handleXcalls()
+      this.handleSafetyList()
     },
     reset () {
       this.form = {}

@@ -31,6 +31,11 @@ export default {
           label: 'B-Call记录',
           name: 'BCALL',
           component: () => import('./components/XCall')
+        },
+        {
+          label: '车身安全提醒',
+          name: 'safety',
+          component: () => import('./components/bodySafety')
         }
       ]
     }

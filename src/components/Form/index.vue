@@ -22,9 +22,10 @@
         >
           <slot />
           <!-- solt -->
-          <template v-if="item.type === 'slot'">
-            <slot :name="item.value" />
-          </template>
+          <slot
+            v-if="item.slot"
+            :name="item.slot"
+          />
           <!-- 详情项 -->
           <span v-if="!item.type">
             {{ item.formatFiled ? item.formatFiled(item.value, getValueByPath(form, item.value)) : getValueByPath(form, item.value) }}
@@ -56,7 +57,6 @@
             v-model="form[item.value]"
             v-bind="item"
             :placeholder="getPlaceholder(item)"
-            @change="item.change(form[item.value])"
           >
             <el-option
               v-for="childItem in item.list"
