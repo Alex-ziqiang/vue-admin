@@ -18,15 +18,16 @@
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: $menuWidth;
-    .el-menu-item:not(.is-active):hover,.el-submenu__title:hover{
-      color: $menuActiveText !important;
-      background-color: $menuBg;
-      .iconfont{
-        color: $menuActiveText;
-      }
+  }
+  .el-menu-item.is-active,.el-submenu__title.is-active {
+    color: $menuActiveText !important;
+    background-color: $menuActiveBg !important;
+    .iconfont{
+      color: $menuActiveText;
     }
   }
 }
+
 .breadcrumb-wrapper {
   font-size: 12px;
   padding: 13px 32px;

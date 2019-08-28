@@ -2,7 +2,7 @@
   <div class="menu-wrapper">
     <!-- 菜单部分 -->
     <el-menu
-      default-active="$route.path"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="true"
@@ -48,18 +48,19 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "~@/styles/variables.scss";
 .collapse-btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60px;
-  background-color: #131822;
+  height: $collapseBtnHeight;
+  background-color: $collapseBtnBg;
   cursor: pointer;
   .btn-item {
     width: 24px;
     height: 2px;
-    background-color: #4582ff;
+    background-color: $collapseBtn;
   }
   .center {
     margin: 4px 0;
