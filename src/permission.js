@@ -21,7 +21,6 @@ router.beforeEach((to, from, next) => {
       } else {
         store.dispatch('manager/getUserInfo').then(response => {
           store.dispatch('permission/generateRoutes', response.operatorBean.roleType).then(accessedRoutes => {
-            // resetRouter() // 重置router避免name重名
             router.addRoutes(accessedRoutes) // 根据用户角色，动态添加权限路由
             next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
           })

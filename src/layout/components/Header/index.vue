@@ -18,15 +18,15 @@
             src="@/assets/images/avatar.png"
             class="role-img"
           >
+          <div class="user-info">
+            <div class="role">
+              {{ formatFiled('roleType', operatorBean.roleType) }}
+            </div>
+            <div class="username">
+              {{ operatorBean.userName }}
+            </div>
+          </div>
         </div>
-        <!-- <div>
-          <div class="role">
-            {{ roleFormat(operatorBean.roleType) }}
-          </div>
-          <div class="username">
-            {{ operatorBean.userName }}
-          </div>
-        </div> -->
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="userInfo">
             账号信息
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { formatFiled } from '@/utils/format'
 import UserInfo from './UserInfo'
 import ModifyPassword from './ModifyPassword'
 import Screenfull from '@/components/Screenfull'
@@ -59,7 +61,13 @@ export default {
       modifyPasswordOuterVisible: false
     }
   },
+  computed: {
+    ...mapGetters([
+      'operatorBean'
+    ])
+  },
   methods: {
+    formatFiled,
     handleCommand (command) {
       if (command === 'logout') {
         this.logout()
@@ -105,9 +113,10 @@ export default {
   }
   .right {
     float: right;
+    margin: 10px 0;
     .right-item {
       display: inline-block;
-      padding: 0 8px;
+      padding: 0 16px;
       height: 100%;
       font-size: 20px;
       color: #FFF;
@@ -121,10 +130,16 @@ export default {
       font-size: 28px;
     }
     .avatar-wrapper {
-      height: 100%;
-      line-height: $headerHeight;
       .role-img {
         vertical-align: middle;
+      }
+      .user-info {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 14px;
+        .role {
+          color: #249AFF;
+        }
       }
     }
   }
