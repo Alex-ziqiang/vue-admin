@@ -1,5 +1,5 @@
 import { formatDate } from 'element-ui/src/utils/date-util'
-const filedMap = {
+export const filedMap = {
   roleType: {
     'SUPER': '超级管理员'
   },
@@ -18,6 +18,25 @@ const filedMap = {
     'SALE_WAREHOUSED': '销售已入库',
     'VEHICLE_SOLD': '车辆已售出',
     'VEHICLE_ACTIVATED': '车辆已激活'
+  },
+  reasonType: {
+    THEFT: '被盗',
+    TIRED_DRIVING: '疲劳驾驶',
+    UNLOCK: '未锁车',
+    WIN_UNCLOSE: '未关窗',
+    SUPPLY: '馈电',
+    UNEXCEPT_MOVE: '拖车通知',
+    ACCELERATE: '急加速',
+    DECELERATE: '急减速',
+    TURN: '急转弯',
+    OVERSPEED: '超速',
+    NO_SEATBELT: '未系安全带',
+    NO_STEER_WHEEL: '未掌控方向盘',
+    LIGHT_UNCLOSE: '车灯未关',
+    UNSAFE: '不安全驾驶通知',
+    CERT_SAVE_FAILED: '证书保存失败',
+    TURN_WITHOUT_LIGHT: '转弯不打转向灯',
+    NEUTRAL_GEAR_DRIVING: '空挡滑行'
   },
   produceDate: val => {
     return formatDate(val, 'yyyy-MM-dd')
@@ -43,6 +62,7 @@ export const formatFiled = (key, value) => {
 }
 
 export const formatter = (row, column, cellValue, index) => {
+  console.log(column)
   if (!filedMap[column.property]) return
   if (typeof filedMap[column.property] === 'function') {
     return filedMap[column.property](cellValue)

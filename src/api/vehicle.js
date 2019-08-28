@@ -26,3 +26,12 @@ export function getXcalls (params) {
     params
   })
 }
+
+/* 车身安全 查询 */
+export function safety (params) {
+  return request({
+    url: `/v0/vehicles/safety`,
+    method: 'get',
+    params
+  })
+}
