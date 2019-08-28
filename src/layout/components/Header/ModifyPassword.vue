@@ -57,7 +57,7 @@ export default {
     return {
       form: {},
       formItems: [
-        { type: 'slot', label: '账号', value: 'userName' },
+        { slot: 'userName', label: '账号' },
         { type: 'password', label: '原密码', value: 'originPassword', showPassword: true, clearable: true },
         { type: 'password', label: '新密码', value: 'newPassword', showPassword: true, clearable: true },
         { type: 'password', label: '确认密码', value: 'confirmPassword', showPassword: true, clearable: true }
