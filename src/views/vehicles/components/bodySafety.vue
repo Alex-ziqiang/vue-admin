@@ -33,7 +33,7 @@ import { safety } from '@/api/vehicle'
 import Form from '@/components/Form'
 import Table from '@/components/Table'
 export default {
-  name: 'Safety',
+  name: 'safety',
   components: { Form, Table },
   props: {
     name: {
