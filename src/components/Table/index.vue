@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { getRowIdentity } from 'element-ui/packages/table/src/util'
+import { getRowIdentity } from '@/utils'
 export default {
   name: 'Table',
   inheritAttrs: false,
