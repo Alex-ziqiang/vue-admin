@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import { getValueByPath } from 'element-ui/src/utils/util'
+import { getValueByPath } from '@/utils'
 export default {
   name: 'Form',
   inheritAttrs: false,

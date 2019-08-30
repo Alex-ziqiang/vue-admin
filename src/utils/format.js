@@ -1,4 +1,4 @@
-import { formatDate } from 'element-ui/src/utils/date-util'
+import dayjs from 'dayjs'
 const filedMap = {
   roleType: {
     'SUPER': '超级管理员'
@@ -20,13 +20,13 @@ const filedMap = {
     'VEHICLE_ACTIVATED': '车辆已激活'
   },
   produceDate: val => {
-    return formatDate(val, 'yyyy-MM-dd')
+    return dayjs(val).format('YYYY-MM-DD')
   },
   factoryDate: val => {
-    return formatDate(val, 'yyyy-MM-dd')
+    return dayjs(val).format('YYYY-MM-DD')
   },
   collectTime: val => {
-    return formatDate(val, 'yyyy-MM-dd HH:mm:ss')
+    return dayjs(val).format('YYYY-MM-DD')
   },
   contactNumber: val => {
     return val ? '+86' + val : ''

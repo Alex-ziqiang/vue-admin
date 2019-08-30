@@ -160,3 +160,37 @@ export const isEmpty = function (val) {
 
   return false
 }
+export const getRowIdentity = (row, rowKey) => {
+  if (!row) throw new Error('row is required when get row identity')
+  if (typeof rowKey === 'string') {
+    if (rowKey.indexOf('.') < 0) {
+      return row[rowKey]
+    }
+    let key = rowKey.split('.')
+    let current = row
+    for (let i = 0; i < key.length; i++) {
+      current = current[key[i]]
+    }
+    return current
+  } else if (typeof rowKey === 'function') {
+    // eslint-disable-next-line no-useless-call
+    return rowKey.call(null, row)
+  }
+}
+export const getValueByPath = function (object, prop) {
+  prop = prop || ''
+  const paths = prop.split('.')
+  let current = object
+  let result = null
+  for (let i = 0, j = paths.length; i < j; i++) {
+    const path = paths[i]
+    if (!current) break
+
+    if (i === j - 1) {
+      result = current[path]
+      break
+    }
+    current = current[path]
+  }
+  return result
+}
