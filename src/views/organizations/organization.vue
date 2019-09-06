@@ -18,10 +18,10 @@
       <Table
         :loading="tableLoading"
         :data="data"
+        :total="total"
         :columns="columns"
         :pagination="pagination"
-        @current-change="handleCurrentChange"
-        @size-change="handleSizeChange"
+        @pagination-change="handlePageChange"
       />
     </el-card>
     <OrgDetail
@@ -82,7 +82,6 @@ export default {
         { label: '新增', type: 'success', icon: 'el-icon-plus', click: this.handleAdd }
       ],
       tableLoading: false,
-      totalCount: '',
       data: [],
       columns: [
         {
@@ -104,9 +103,9 @@ export default {
       ],
       pagination: {
         currentPage: 1,
-        pageSize: 10,
-        total: 0
+        pageSize: 10
       },
+      total: 0,
       type: '',
       addEditVisible: false,
       addEditForm: {},
@@ -122,13 +121,9 @@ export default {
       this.addEditVisible = false
       this.handleOrganizations()
     },
-    handleCurrentChange (val) {
-      this.pagination.currentPage = val
-      this.handleOrganizations()
-    },
-    handleSizeChange (val) {
-      this.pagination.currentPage = 1
-      this.pagination.pageSize = val
+    handlePageChange ({ type, val }) {
+      this.pagination[type] = val
+      type === 'pageSize' && (this.pagination.currentPage = 1)
       this.handleOrganizations()
     },
     handleAdd () {
@@ -169,8 +164,8 @@ export default {
       getOrganizations(params)
         .then(res => {
           this.tableLoading = false
-          this.data = res.organizations
-          this.pagination.total = res.totalCount
+          this.data = res.organizations || []
+          this.total = res.totalCount || 0
         })
         .catch(() => {
           this.tableLoading = false

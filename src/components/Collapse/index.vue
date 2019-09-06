@@ -5,7 +5,7 @@
     <el-row :gutter="20">
       <el-col
         v-for="item in collapseItems"
-        :key="item.label"
+        :key="item.value"
         :md="item.span || 12"
         :xs="24"
       >
@@ -16,8 +16,7 @@
           <Form
             :form="form"
             :form-items="item.formItems"
-            :is-collapse="true"
-            label-width="auto"
+            :two-columns="true"
           />
           <slot />
         </el-collapse-item>

@@ -33,6 +33,7 @@
     >
       <el-tabs
         :value="selectedTab"
+        :type="tabType"
         @tab-click="tabClick"
       >
         <el-tab-pane
@@ -53,14 +54,19 @@
       v-if="type === 'add' || type === 'edit'"
       slot="footer"
     >
-      <el-button @click="outerClose">
+      <el-button
+        size="small"
+        @click="outerClose"
+      >
         取消
       </el-button>
       <el-button
         type="primary"
+        size="small"
+        :loading="loading"
         @click="submit"
       >
-        确定
+        {{ submitText }}
       </el-button>
     </template>
     <!-- body -->
@@ -115,6 +121,18 @@ export default {
     selectedTab: {
       type: String,
       default: ''
+    },
+    tabType: {
+      type: String,
+      default: ''
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    submitText: {
+      type: String,
+      default: '确定'
     }
   },
   methods: {

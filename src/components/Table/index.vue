@@ -9,19 +9,24 @@
     >
       <template v-for="column in columns">
         <slot
-          v-if="column.slot && !column.hidden"
+          v-if="column.slot && !(typeof column.hidden === 'function' ? column.hidden() : column.hidden)"
           :name="column.slot"
         />
         <el-table-column
-          v-if="column.buttons && !column.hidden"
-          :key="column.label"
+          v-if="column.buttons && !(typeof column.hidden === 'function' ? column.hidden() : column.hidden)"
+          :key="column.value"
           v-bind="column"
         >
           <template v-slot="{row}">
             <el-button
               v-for="button in column.buttons.filter(button => (!button.ifRender || button.ifRender(row)))"
-              :key="button.label"
-              v-bind="button"
+              :key="button.value"
+              :size="button.size"
+              :type="button.type"
+              :icon="button.icon"
+              :loading="button.loading"
+              :class="typeof button.class === 'function' ? button.class(row) : button.class"
+              :disabled="typeof button.disabled === 'function' ? button.disabled(row) : button.disabled"
               @click="button.click(row)"
             >
               {{ button.label || getRowIdentity(row, button.prop) }}
@@ -29,10 +34,10 @@
           </template>
         </el-table-column>
         <el-table-column
-          v-else-if="!column.hidden"
-          :key="column.label"
+          v-else-if="!(typeof column.hidden === 'function' ? column.hidden() : column.hidden)"
+          :key="column.value"
           v-bind="column"
-          :hidden-overflow-tooltip="true"
+          :show-overflow-tooltip="showTip"
         />
       </template>
     </el-table>
@@ -40,6 +45,7 @@
       v-if="pagination"
       :layout="layout"
       v-bind="pagination"
+      :total="total"
       @current-change="currentChange"
       @size-change="sizeChange"
     />
@@ -64,9 +70,17 @@ export default {
       type: Array,
       required: true
     },
+    showTip: {
+      type: Boolean,
+      default: true
+    },
     pagination: {
       type: Object,
       default: null
+    },
+    total: {
+      type: Number,
+      default: 0
     },
     layout: {
       type: String,
@@ -76,10 +90,10 @@ export default {
   methods: {
     getRowIdentity,
     currentChange (val) {
-      this.$emit('current-change', val)
+      this.$emit('pagination-change', { type: 'currentPage', val })
     },
     sizeChange (val) {
-      this.$emit('size-change', val)
+      this.$emit('pagination-change', { type: 'pageSize', val })
     }
   }
 }

@@ -6,10 +6,11 @@
   >
     <el-tab-pane
       v-for="tab in tabs"
-      :key="tab.label"
+      :key="tab.value"
       :label="tab.label"
       :name="tab.name"
     >
+      <slot />
       <component
         :is="value === tab.name ? tab.component : false"
         :name="value"
