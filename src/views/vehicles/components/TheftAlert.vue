@@ -18,10 +18,10 @@
       <Table
         :loading="tableLoading"
         :data="data"
+        :total="total"
         :columns="columns"
         :pagination="pagination"
-        @current-change="handleCurrentChange"
-        @size-change="handleSizeChange"
+        @pagination-change="handlePageChange"
       />
     </el-card>
   </div>
@@ -90,22 +90,18 @@ export default {
       ],
       pagination: {
         currentPage: 1,
-        pageSize: 10,
-        total: 0
-      }
+        pageSize: 10
+      },
+      total: 0
     }
   },
   created () {
     this.handleThefts()
   },
   methods: {
-    handleCurrentChange (val) {
-      this.pagination.currentPage = val
-      this.handleThefts()
-    },
-    handleSizeChange (val) {
-      this.pagination.currentPage = 1
-      this.pagination.pageSize = val
+    handlePageChange ({ type, val }) {
+      this.pagination[type] = val
+      type === 'pageSize' && (this.pagination.currentPage = 1)
       this.handleThefts()
     },
     handleAddress () {
@@ -118,8 +114,8 @@ export default {
       getThefts(params)
         .then(res => {
           this.tableLoading = false
-          this.data = res.vehicleTheftBeans
-          this.pagination.total = res.totalCount
+          this.data = res.vehicleTheftBeans || []
+          this.total = res.totalCount || 0
         })
         .catch(() => {
           this.tableLoading = false

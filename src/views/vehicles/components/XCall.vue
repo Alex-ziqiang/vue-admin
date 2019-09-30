@@ -18,10 +18,10 @@
       <Table
         :loading="tableLoading"
         :data="data"
+        :total="total"
         :columns="columns"
         :pagination="pagination"
-        @current-change="handleCurrentChange"
-        @size-change="handleSizeChange"
+        @pagination-change="handlePageChange"
       />
     </el-card>
   </div>
@@ -93,22 +93,18 @@ export default {
       ],
       pagination: {
         currentPage: 1,
-        pageSize: 10,
-        total: 0
-      }
+        pageSize: 10
+      },
+      total: 0
     }
   },
   created () {
     this.handleXcalls()
   },
   methods: {
-    handleCurrentChange (val) {
-      this.pagination.currentPage = val
-      this.handleXcalls()
-    },
-    handleSizeChange (val) {
-      this.pagination.currentPage = 1
-      this.pagination.pageSize = val
+    handlePageChange ({ type, val }) {
+      this.pagination[type] = val
+      type === 'pageSize' && (this.pagination.currentPage = 1)
       this.handleXcalls()
     },
     handleAddress () {
@@ -121,8 +117,8 @@ export default {
       getXcalls(params)
         .then(res => {
           this.tableLoading = false
-          this.data = res.vehicleXCallList
-          this.pagination.total = res.totalCount
+          this.data = res.vehicleXCallList || []
+          this.total = res.totalCount || 0
         })
         .catch(() => {
           this.tableLoading = false

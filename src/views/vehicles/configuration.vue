@@ -19,10 +19,10 @@
       <Table
         :loading="tableLoading"
         :data="data"
+        :total="total"
         :columns="columns"
         :pagination="pagination"
-        @current-change="handleCurrentChange"
-        @size-change="handleSizeChange"
+        @pagination-change="handlePageChange"
       />
     </el-card>
     <VehicleDetail
@@ -119,9 +119,9 @@ export default {
       ],
       pagination: {
         currentPage: 1,
-        pageSize: 10,
-        total: 0
+        pageSize: 10
       },
+      total: 0,
       detailVisible: false,
       uuid: ''
     }
@@ -130,13 +130,9 @@ export default {
     this.handleVehicles()
   },
   methods: {
-    handleCurrentChange (val) {
-      this.pagination.currentPage = val
-      this.handleVehicles()
-    },
-    handleSizeChange (val) {
-      this.pagination.currentPage = 1
-      this.pagination.pageSize = val
+    handlePageChange ({ type, val }) {
+      this.pagination[type] = val
+      type === 'pageSize' && (this.pagination.currentPage = 1)
       this.handleVehicles()
     },
     handleDetail (row) {
@@ -150,8 +146,8 @@ export default {
       getVehicles(params)
         .then(res => {
           this.tableLoading = false
-          this.data = res.vehicles
-          this.pagination.total = res.totalCount
+          this.data = res.vehicles || []
+          this.total = res.totalCount || 0
         })
         .catch(() => {
           this.tableLoading = false
